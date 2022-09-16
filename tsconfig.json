@@ -1,14 +1,10 @@
 {
   "compilerOptions": {
-    "lib": ["esnext", "dom", "dom.iterable"],
-    "jsx": "react-jsx",
+    "lib": ["esnext"],
     "target": "es2016",
     "module": "ESNext",
     "moduleResolution": "Node",
-    "rootDir": "src",
-    "outDir": "dist",
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
     "strict": true,
     "noImplicitAny": true,
     "skipLibCheck": true,
@@ -18,5 +14,6 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true
-  }
+  },
+  "exclude": ["dist", "node_modules"]
 }
