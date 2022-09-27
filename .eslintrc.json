@@ -28,7 +28,15 @@
   "plugins": ["@typescript-eslint", "jest", "import"],
   "rules": {
     "import/no-unresolved": "error",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "no-underscore-dangle": "off",
+    "import/order": [
+      "error",
+      {
+        "alphabetize": { "order": "asc" },
+        "newlines-between": "always"
+      }
+    ]
   },
   "settings": {
     "import/parsers": {
@@ -41,12 +49,5 @@
       "node": true
     }
   },
-  "ignorePatterns": [
-    "node_modules/",
-    "dist/",
-    "build/",
-    "coverage/",
-    "*.js",
-    "*.jsx"
-  ]
+  "ignorePatterns": ["node_modules/", "dist/", "out/", "coverage/", "*.js", "*.jsx"]
 }

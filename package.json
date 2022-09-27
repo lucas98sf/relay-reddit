@@ -5,9 +5,14 @@
   "scripts": {
     "clear": "npm exec --workspaces -- npx rimraf node_modules && npx rimraf node_modules",
     "dev": "concurrently \"yarn dev:server\" \"yarn dev:web\"",
-    "dev:server": "yarn workspace @relay-app/server dev",
     "dev:web": "yarn workspace @relay-app/web dev",
-    "prepare": "husky install"
+    "dev:server": "yarn workspace @relay-app/server dev",
+    "update-schema": "yarn workspace @relay-app/server update-schema",
+    "build:web": "yarn workspace @relay-app/web build",
+    "build:server": "yarn workspace @relay-app/server build",
+    "build": "concurrently \"yarn build:server\" \"yarn build:web\"",
+    "prepare": "husky install",
+    "lint": "eslint --fix ."
   },
   "license": "MIT",
   "workspaces": [

@@ -13,13 +13,11 @@ dist-ssr
 *.local
 
 .env**
+!.env.example
 .eslintcache
 coverage
-__generated__
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
 .idea
 .DS_Store
 *.suo
