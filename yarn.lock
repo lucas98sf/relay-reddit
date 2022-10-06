@@ -1020,6 +1020,11 @@
   resolved "https://registry.yarnpkg.com/@chakra-ui/anatomy/-/anatomy-2.0.6.tgz#83164841d27eaa271ffa747534519bcd323c312f"
   integrity sha512-Vgop2FFdhVtX7BydjZdJWZAWy+DdXBU1IMaBppz6COaH+/7OXxoI2ec2bs17ehJyBO0M+ud3OLj5UCFQ79YsoQ==
 
+"@chakra-ui/anatomy@2.0.7":
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/anatomy/-/anatomy-2.0.7.tgz#33e60c7c4d6e5f949f6f8308249dc571f84ead1e"
+  integrity sha512-vzcB2gcsGCxhrKbldQQV6LnBPys4eSSsH2UA2mLsT+J3WlXw0aodZw0eE/nH7yLxe4zaQ4Gnc0KjkFW4EWNKSg==
+
 "@chakra-ui/avatar@2.1.0":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@chakra-ui/avatar/-/avatar-2.1.0.tgz#009b4e126c58ef0183618cfbfb29f8e7e3357ee9"
@@ -1173,6 +1178,20 @@
   integrity sha512-utO569d9bptEraJrEhuImfNzQ8v+a8PsQh8kTsodCzg8B16R3t5TTuoqeJqS6Nq16Vq6w87QbX3/4A73CNK5fw==
   dependencies:
     "@chakra-ui/shared-utils" "2.0.1"
+
+"@chakra-ui/icon@3.0.11":
+  version "3.0.11"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/icon/-/icon-3.0.11.tgz#a51dda24bed2f2ed77b4136ada8f22d3249c9870"
+  integrity sha512-RG4jf/XmBdaxOYI5J5QstEtTCPoVlmrQ/XiWhvN0LTgAnmZIqVwFl3Uw+satArdStHAs0GmJZg/E/soFTWuFmw==
+  dependencies:
+    "@chakra-ui/shared-utils" "2.0.2"
+
+"@chakra-ui/icons@^2.0.11":
+  version "2.0.11"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/icons/-/icons-2.0.11.tgz#3faf53c499c7c61c65b6e5ff4b0933f48b9ba416"
+  integrity sha512-WjxrFMt9hHpuZlnBh4fhtGOkIVlwYwHNmwq4sJGxYWlg8UnEhVJMoOojheJDy/d3Gp9+ApetlK3vt8fV/rZamg==
+  dependencies:
+    "@chakra-ui/icon" "3.0.11"
 
 "@chakra-ui/image@2.0.10":
   version "2.0.10"
@@ -1555,6 +1574,11 @@
   resolved "https://registry.yarnpkg.com/@chakra-ui/shared-utils/-/shared-utils-2.0.1.tgz#41e314e42c96039e8ffb265e73145cf755813ab4"
   integrity sha512-NXDBl/u4wrSNp0ON5R3r3evkRurrAz2yuO7neooaG+O5HEenVouGqm4CsXd6lUAPmjwiGzA0LQFNCt0Hj92dXg==
 
+"@chakra-ui/shared-utils@2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/shared-utils/-/shared-utils-2.0.2.tgz#1df08133194c12ac4df9302604ec37784c2bb026"
+  integrity sha512-wC58Fh6wCnFFQyiebVZ0NI7PFW9+Vch0QE6qN7iR+bLseOzQY9miYuzPJ1kMYiFd6QTOmPJkI39M3wHqrPYiOg==
+
 "@chakra-ui/skeleton@2.0.16":
   version "2.0.16"
   resolved "https://registry.yarnpkg.com/@chakra-ui/skeleton/-/skeleton-2.0.16.tgz#7a62c7e11ab2d3a2bb68c0829e0a00c138a9692d"
@@ -1591,7 +1615,7 @@
     "@chakra-ui/icon" "3.0.10"
     "@chakra-ui/react-context" "2.0.3"
 
-"@chakra-ui/styled-system@2.3.3":
+"@chakra-ui/styled-system@2.3.3", "@chakra-ui/styled-system@^2.3.3":
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/@chakra-ui/styled-system/-/styled-system-2.3.3.tgz#6152739f817b6c6786a53c8388ea7ab5b338e7cc"
   integrity sha512-gCvyJkooWeE8NE6uOSkCf/sje7MdM92rx58dDcfHhVer+eYxat4AW4G8i9Tjnk+FWvgiYdqr70+SBWzEmfqn6g==
@@ -1661,6 +1685,14 @@
     "@chakra-ui/anatomy" "2.0.6"
     "@ctrl/tinycolor" "^3.4.0"
 
+"@chakra-ui/theme-tools@2.0.12", "@chakra-ui/theme-tools@^2.0.12":
+  version "2.0.12"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/theme-tools/-/theme-tools-2.0.12.tgz#b29d9fb626d35e3b00f532c64f95ea261d8f6997"
+  integrity sha512-mnMlKSmXkCjHUJsKWmJbgBTGF2vnLaMLv1ihkBn5eQcCubMQrBLTiMAEFl5pZdzuHItU6QdnLGA10smcXbNl0g==
+  dependencies:
+    "@chakra-ui/anatomy" "2.0.7"
+    "@ctrl/tinycolor" "^3.4.0"
+
 "@chakra-ui/theme@2.1.12":
   version "2.1.12"
   resolved "https://registry.yarnpkg.com/@chakra-ui/theme/-/theme-2.1.12.tgz#bb4ffe38849a5f7163895f74a08a06aa916fe020"
@@ -1668,6 +1700,14 @@
   dependencies:
     "@chakra-ui/anatomy" "2.0.6"
     "@chakra-ui/theme-tools" "2.0.11"
+
+"@chakra-ui/theme@^2.1.13":
+  version "2.1.13"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/theme/-/theme-2.1.13.tgz#51e76179048cf87c0cb551a619a49d183246550e"
+  integrity sha512-qbrrvn9JstyLFV2qyhwgnhwzVs4zSJ4PcS3ScL8kafXJazTRU6onbCcjEZ5mVCw6z8uEz3jcE8Y5KIhVzaB+Xw==
+  dependencies:
+    "@chakra-ui/anatomy" "2.0.7"
+    "@chakra-ui/theme-tools" "2.0.12"
 
 "@chakra-ui/toast@3.0.12":
   version "3.0.12"
@@ -1852,7 +1892,7 @@
   dependencies:
     "@entria/graphql-mongoose-loader" "^4.3.2"
 
-"@entria/graphql-mongoose-loader@^4.3.2":
+"@entria/graphql-mongoose-loader@^4.3.2", "@entria/graphql-mongoose-loader@^4.4.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@entria/graphql-mongoose-loader/-/graphql-mongoose-loader-4.4.0.tgz#eb420b82f9889a7d916fc74d4a8437dfba7daabd"
   integrity sha512-RcNdqPQf/GlnQch1IyUOTMTw13k+zE7zK9JeMd5cUGnShI/ih4k1JZEEtJDwyRwW1bOqAhlmP8dyY1CY8iPX8Q==
@@ -5854,10 +5894,10 @@ mongodb@4.9.1:
   optionalDependencies:
     saslprep "^1.0.3"
 
-mongoose@^6.6.1:
-  version "6.6.1"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-6.6.1.tgz#8aec30924b1a524924d9de4eb4746951f6aadd26"
-  integrity sha512-hPDamnn6quL9TjIrOudqUS5sMilENmP/gfxoCIb+rDmlzawtM7+MVCAWrM9930fzD20N7qAema/zE9QIDuifhQ==
+mongoose@^6.0.5:
+  version "6.6.2"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-6.6.2.tgz#162d651ee830f06c6fd2c8a5886646a5828c0458"
+  integrity sha512-SrB0DgB1Ime/xh4Tr2yLkFKO5Aa/FrDyAo/ILGDWM5qjhZdhl7HKftiQPibwywC3rTkeU4nc2yuPYKFLBYCBWA==
   dependencies:
     bson "^4.6.5"
     kareem "2.4.1"

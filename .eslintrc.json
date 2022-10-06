@@ -36,7 +36,9 @@
         "alphabetize": { "order": "asc" },
         "newlines-between": "always"
       }
-    ]
+    ],
+    "import/no-cycle": "warn",
+    "func-names": "off"
   },
   "settings": {
     "import/parsers": {

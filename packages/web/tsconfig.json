@@ -11,5 +11,9 @@
     "jsx": "react-jsx"
   },
   "include": ["src/**.ts", "src/**.tsx", "src/relay/index.ts"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

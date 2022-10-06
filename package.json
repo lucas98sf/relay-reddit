@@ -2,24 +2,21 @@
   "name": "relay-app",
   "version": "1.0.0",
   "private": true,
-  "scripts": {
-    "clear": "npm exec --workspaces -- npx rimraf node_modules && npx rimraf node_modules",
-    "dev": "concurrently \"yarn dev:server\" \"yarn dev:web\"",
-    "dev:web": "yarn workspace @relay-app/web dev",
-    "dev:server": "yarn workspace @relay-app/server dev",
-    "update-schema": "yarn workspace @relay-app/server update-schema",
-    "build:web": "yarn workspace @relay-app/web build",
-    "build:server": "yarn workspace @relay-app/server build",
-    "build": "concurrently \"yarn build:server\" \"yarn build:web\"",
-    "prepare": "husky install",
-    "lint": "eslint --fix ."
-  },
   "license": "MIT",
   "workspaces": [
     "packages/*"
   ],
-  "engines": {
-    "node": ">=16.0.0"
+  "scripts": {
+    "build": "concurrently \"yarn build:server\" \"yarn build:web\"",
+    "build:server": "yarn workspace @relay-app/server build",
+    "build:web": "yarn workspace @relay-app/web build",
+    "clear": "npm exec --workspaces -- npx rimraf node_modules && npx rimraf node_modules",
+    "dev": "concurrently \"yarn dev:server\" \"yarn dev:web\"",
+    "dev:server": "yarn workspace @relay-app/server dev",
+    "dev:web": "yarn workspace @relay-app/web dev",
+    "lint": "eslint --fix . && prettier --write .",
+    "prepare": "husky install",
+    "update-schema": "yarn workspace @relay-app/server update-schema"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -57,5 +54,8 @@
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^4.8.3"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }

@@ -1,21 +1,22 @@
 {
   "name": "@relay-app/web",
-  "private": true,
   "version": "1.0.0",
+  "private": true,
   "type": "module",
   "scripts": {
+    "build": "relay-compiler --validate && tsc --noEmit && vite build",
     "dev": "concurrently \"npm:dev:*\"",
     "dev:relay": "relay-compiler",
     "dev:vite": "vite",
-    "relay": "relay-compiler --watch",
-    "build": "relay-compiler --validate && tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "relay": "relay-compiler --watch"
   },
   "dependencies": {
-    "@relay-app/ui": "*",
+    "@chakra-ui/icons": "^2.0.11",
     "@chakra-ui/react": "^2.3.4",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@relay-app/ui": "*",
     "babel-plugin-relay": "^14.1.0",
     "framer-motion": "^6",
     "react": "^18.2.0",
