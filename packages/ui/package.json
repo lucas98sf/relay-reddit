@@ -10,6 +10,7 @@
     "@chakra-ui/theme-tools": "^2.0.12",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@fontsource/ibm-plex-sans": "^4.5.13",
     "framer-motion": "^6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
