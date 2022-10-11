@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "prebuild": "yarn update-schema",
+    "predev": "yarn update-schema",
     "dev": "ts-node-dev -r tsconfig-paths/register --transpile-only --ignore-watch node_modules src/server.ts",
-    "pre:build": "yarn update-schema",
-    "pre:dev": "yarn update-schema",
     "update-schema": "ts-node -r tsconfig-paths/register --transpile-only scripts/updateSchema.ts"
   },
   "dependencies": {

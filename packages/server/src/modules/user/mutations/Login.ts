@@ -9,7 +9,7 @@ import UserType from '../UserType';
 import { generateToken } from '@/auth';
 import { config } from '@/config';
 
-export const UserLoginMutation = mutationWithClientMutationId({
+export const UserLogin = mutationWithClientMutationId({
   name: 'UserLogin',
   inputFields: {
     email: {

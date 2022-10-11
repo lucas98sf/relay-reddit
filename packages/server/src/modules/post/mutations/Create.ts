@@ -8,7 +8,7 @@ import { PostConnection } from '../PostType';
 import { GraphQLStringWithLength } from '@/graphql/customScalars';
 import { GraphQLContext } from '@/graphql/types';
 
-export const PostCreateMutation = mutationWithClientMutationId({
+export const PostCreate = mutationWithClientMutationId({
   name: 'PostCreate',
   inputFields: {
     title: {

@@ -34,6 +34,10 @@ const PostType = new GraphQLObjectType<IPost & { _id: string }, GraphQLContext>(
       type: GraphQLString,
       resolve: post => post.image,
     },
+    // community: {
+    //   type: CommunityType,
+    //   resolve: (post, _, context) => CommunityLoader.load(context, post.community),
+    // },
     author: {
       type: UserType,
       resolve: (post, _, context) => UserLoader.load(context, post.author),

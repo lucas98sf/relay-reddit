@@ -10,7 +10,7 @@ import { generateToken } from '@/auth';
 import { config } from '@/config';
 import { GraphQLPassword, GraphQLUsername } from '@/graphql/customScalars';
 
-export const UserRegisterMutation = mutationWithClientMutationId({
+export const UserRegister = mutationWithClientMutationId({
   name: 'UserRegister',
   inputFields: {
     name: {
