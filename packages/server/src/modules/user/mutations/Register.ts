@@ -1,6 +1,6 @@
 import { errorField, successField } from '@entria/graphql-mongo-helpers';
 import { mutationWithClientMutationId } from 'graphql-relay';
-import { GraphQLEmailAddress, GraphQLNonEmptyString } from 'graphql-scalars';
+import { GraphQLEmailAddress, GraphQLNonEmptyString, GraphQLURL } from 'graphql-scalars';
 
 import * as UserLoader from '../UserLoader';
 import User from '../UserModel';
@@ -13,7 +13,7 @@ import { GraphQLPassword, GraphQLUsername } from '@/graphql/customScalars';
 export const UserRegister = mutationWithClientMutationId({
   name: 'UserRegister',
   inputFields: {
-    name: {
+    username: {
       type: GraphQLUsername,
     },
     email: {
@@ -22,16 +22,20 @@ export const UserRegister = mutationWithClientMutationId({
     password: {
       type: GraphQLPassword,
     },
+    avatar: {
+      type: GraphQLURL,
+    },
   },
-  mutateAndGetPayload: async ({ name, email, password }, context) => {
+  mutateAndGetPayload: async ({ username, email, password, avatar }, context) => {
     const hasUser = (await User.countDocuments({ email: email.trim().toLowerCase() })) > 0;
-    // console.log({ name, email, password }, hasUser);
+    // console.log({ username, email, password }, hasUser);
     if (hasUser) return { error: 'Email already in use' };
 
     const user = await new User({
-      name,
+      username,
       email,
       password,
+      avatar,
     }).save();
 
     const token = generateToken(user);

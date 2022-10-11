@@ -1,5 +1,6 @@
 import { errorField, successField } from '@entria/graphql-mongo-helpers';
 import { mutationWithClientMutationId, toGlobalId } from 'graphql-relay';
+import { URLResolver as GraphQLURL } from 'graphql-scalars';
 
 import * as PostLoader from '../PostLoader';
 import PostModel from '../PostModel';
@@ -12,10 +13,16 @@ export const PostCreate = mutationWithClientMutationId({
   name: 'PostCreate',
   inputFields: {
     title: {
-      type: GraphQLStringWithLength('Title', 1, 100),
+      type: GraphQLStringWithLength('Title'),
     },
     content: {
-      type: GraphQLStringWithLength('Content', 1, 9999),
+      type: GraphQLStringWithLength('Content', 0, 9999),
+    },
+    image: {
+      type: GraphQLURL,
+    },
+    url: {
+      type: GraphQLURL,
     },
   },
   mutateAndGetPayload: async ({ title, content }, context: GraphQLContext) => {

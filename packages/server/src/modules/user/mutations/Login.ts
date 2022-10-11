@@ -1,6 +1,6 @@
 import { errorField, successField } from '@entria/graphql-mongo-helpers';
 import { mutationWithClientMutationId } from 'graphql-relay';
-import { GraphQLEmailAddress, GraphQLNonEmptyString } from 'graphql-scalars';
+import { GraphQLNonEmptyString } from 'graphql-scalars';
 
 import * as UserLoader from '../UserLoader';
 import User from '../UserModel';
@@ -12,15 +12,16 @@ import { config } from '@/config';
 export const UserLogin = mutationWithClientMutationId({
   name: 'UserLogin',
   inputFields: {
-    email: {
-      type: GraphQLEmailAddress,
+    username: {
+      type: GraphQLNonEmptyString,
     },
     password: {
       type: GraphQLNonEmptyString,
     },
   },
-  mutateAndGetPayload: async ({ email, password }, context) => {
-    const user = await User.findOne({ email: email.trim().toLowerCase() });
+  mutateAndGetPayload: async ({ username, password }, context) => {
+    const caseInsensitiveUsername = new RegExp(username.trim(), 'i');
+    const user = await User.findOne({ username: caseInsensitiveUsername });
 
     const defaultErrorMessage = 'Invalid credentials';
 

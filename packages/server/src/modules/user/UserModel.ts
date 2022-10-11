@@ -3,9 +3,10 @@ import mongoose, { Document, Model } from 'mongoose';
 
 const UserSchema = new mongoose.Schema(
   {
-    name: {
+    username: {
       type: String,
       required: true,
+      unique: true,
     },
     email: {
       type: String,
@@ -16,6 +17,9 @@ const UserSchema = new mongoose.Schema(
     password: {
       type: String,
       hidden: true,
+    },
+    avatar: {
+      type: String,
     },
   },
   {
@@ -28,9 +32,10 @@ const UserSchema = new mongoose.Schema(
 );
 
 export interface IUser extends Document {
-  name: string;
+  username: string;
   email: string;
   password: string;
+  avatar?: string;
   authenticate: (plainTextPassword: string) => boolean;
   encryptPassword: (password: string | undefined) => string;
   createdAt: Date;

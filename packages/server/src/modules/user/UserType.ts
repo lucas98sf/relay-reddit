@@ -24,13 +24,17 @@ const UserType = new GraphQLObjectType<IUser & { _id: string }, GraphQLContext>(
   fields: () => ({
     id: globalIdField('User'),
     ...objectIdResolver,
-    name: {
+    username: {
       type: GraphQLString,
-      resolve: user => user.name,
+      resolve: user => user.username,
     },
     email: {
       type: GraphQLString,
       resolve: user => user.email,
+    },
+    avatar: {
+      type: GraphQLString,
+      resolve: user => user.avatar,
     },
     posts: {
       type: new GraphQLNonNull(PostConnection.connectionType),

@@ -33,12 +33,15 @@
     "import/order": [
       "error",
       {
-        "alphabetize": { "order": "asc" },
+        "alphabetize": {
+          "order": "asc"
+        },
         "newlines-between": "always"
       }
     ],
     "import/no-cycle": "warn",
-    "func-names": "off"
+    "func-names": "off",
+    "react/jsx-props-no-spreading": "off"
   },
   "settings": {
     "import/parsers": {

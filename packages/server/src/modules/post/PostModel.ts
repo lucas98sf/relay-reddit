@@ -10,9 +10,11 @@ const PostSchema = new mongoose.Schema(
     },
     content: {
       type: String,
-      required: true,
     },
     image: {
+      type: String,
+    },
+    url: {
       type: String,
     },
     author: {
@@ -32,8 +34,9 @@ const PostSchema = new mongoose.Schema(
 
 export interface IPost extends Document {
   title: string;
-  content: string;
+  content?: string;
   image?: string;
+  url?: string;
   author: Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
