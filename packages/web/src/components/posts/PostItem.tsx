@@ -32,7 +32,7 @@ export function PostItem({ post, isLast, isFirst }: PostItemProps) {
     >
       <PostVotes votes={post.votes} />
       <Image
-        src={post.thumbnail}
+        src={post.image}
         minWidth="100px"
         width="8%"
         height="92%"

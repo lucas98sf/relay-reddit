@@ -1,8 +1,8 @@
 import { Grid, GridItem } from '@chakra-ui/react';
 
-import { Communities } from '../components/Communities';
-import { PostList } from '../components/posts/PostList';
-import { CreatePostButton } from '../components/posts/createPost/Button';
+import { Communities } from '@/components/Communities';
+import { PostList } from '@/components/posts/PostList';
+import { CreatePostButton } from '@/components/posts/createPost/Button';
 
 const posts = [
   {
@@ -61,7 +61,7 @@ export function Home() {
         <CreatePostButton />
       </GridItem>
       <GridItem gridArea="2 / 1 / 3 / 2" as="main">
-        <PostList posts={posts} />
+        <PostList />
       </GridItem>
       <GridItem gridArea={[null, null, '1 / 2 / 3 / 3']} as="aside">
         <Communities />

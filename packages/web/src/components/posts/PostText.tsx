@@ -40,7 +40,7 @@ export function PostText({ post, link }: PostTextProps) {
         <Flex alignSelf="center" flexDirection="row" gap={1}>
           <Text>Posted by</Text>
           <Text as={Link} textStyle="a" to={`u/${post.author}`}>{`u/${post.author}`}</Text>
-          <Text>{`${timeAgo(post.createdAt)} ago`}</Text>
+          <Text>{`${timeAgo(new Date(post.createdAt))} ago`}</Text>
         </Flex>
       </Flex>
     </Box>
