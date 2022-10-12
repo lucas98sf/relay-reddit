@@ -18,7 +18,7 @@ import VoteModel from '../vote/VoteModel';
 import { load } from './CommentLoader';
 import { IComment } from './CommentModel';
 
-const CommentType = new GraphQLObjectType<IComment & { _id: string }, GraphQLContext>({
+const CommentType = new GraphQLObjectType<IComment, GraphQLContext>({
   name: 'Comment',
   description: 'Comment data',
   fields: () => ({
@@ -26,20 +26,19 @@ const CommentType = new GraphQLObjectType<IComment & { _id: string }, GraphQLCon
     ...objectIdResolver,
     content: {
       type: GraphQLString,
-      resolve: comment => comment.content,
-    },
-    votes: {
-      type: new GraphQLNonNull(GraphQLInt),
-      // ???
-      resolve: comment => VoteModel.countVotes({ comment: comment._id }).then(votes => votes.total),
+      resolve: ({ content }) => content,
     },
     post: {
       type: PostType,
-      resolve: (comment, _, context) => PostLoader.load(context, comment.post),
+      resolve: ({ post }, _, context) => PostLoader.load(context, post),
     },
     author: {
       type: UserType,
-      resolve: (comment, _, context) => UserLoader.load(context, comment.author),
+      resolve: ({ author }, _, context) => UserLoader.load(context, author),
+    },
+    votes: {
+      type: new GraphQLNonNull(GraphQLInt),
+      resolve: async ({ _id }) => (await VoteModel.countVotes({ comment: _id }))?.total,
     },
     ...timestampResolver,
   }),

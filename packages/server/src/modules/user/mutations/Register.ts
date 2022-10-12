@@ -28,7 +28,6 @@ export const UserRegister = mutationWithClientMutationId({
   },
   mutateAndGetPayload: async ({ username, email, password, avatar }, context) => {
     const hasUser = (await User.countDocuments({ email: email.trim().toLowerCase() })) > 0;
-    // console.log({ username, email, password }, hasUser);
     if (hasUser) return { error: 'Email already in use' };
 
     const user = await new User({

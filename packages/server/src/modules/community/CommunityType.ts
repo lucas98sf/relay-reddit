@@ -18,7 +18,7 @@ import UserType from '../user/UserType';
 import { load } from './CommunityLoader';
 import { ICommunity } from './CommunityModel';
 
-const communityType = new GraphQLObjectType<ICommunity & { _id: string }, GraphQLContext>({
+const CommunityType = new GraphQLObjectType<ICommunity, GraphQLContext>({
   name: 'Community',
   description: 'Community data',
   fields: () => ({
@@ -26,19 +26,19 @@ const communityType = new GraphQLObjectType<ICommunity & { _id: string }, GraphQ
     ...objectIdResolver,
     name: {
       type: GraphQLString,
-      resolve: community => community.name,
+      resolve: ({ name }) => name,
     },
     title: {
       type: GraphQLString,
-      resolve: community => community.title,
+      resolve: ({ title }) => title,
     },
     about: {
       type: GraphQLString,
-      resolve: community => community.about,
+      resolve: ({ about }) => about,
     },
     owner: {
       type: UserType,
-      resolve: (community, _, context) => UserLoader.load(context, community.owner),
+      resolve: ({ owner }, _, context) => UserLoader.load(context, owner),
     },
     posts: {
       type: new GraphQLNonNull(PostConnection.connectionType),
@@ -58,11 +58,11 @@ const communityType = new GraphQLObjectType<ICommunity & { _id: string }, GraphQ
   interfaces: () => [nodeInterface],
 });
 
-export default communityType;
+export default CommunityType;
 
-registerTypeLoader(communityType, load);
+registerTypeLoader(CommunityType, load);
 
 export const CommunityConnection = connectionDefinitions({
-  name: 'community',
-  nodeType: communityType,
+  name: 'Community',
+  nodeType: CommunityType,
 });

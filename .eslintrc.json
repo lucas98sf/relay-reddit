@@ -36,10 +36,18 @@
         "alphabetize": {
           "order": "asc"
         },
-        "newlines-between": "always"
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+        "newlines-between": "always",
+        "pathGroups": [
+          {
+            "group": "internal",
+            "pattern": "@/**",
+            "position": "after"
+          }
+        ]
       }
     ],
-    "import/no-cycle": "warn",
+    "import/no-cycle": "off",
     "func-names": "off",
     "react/jsx-props-no-spreading": "off"
   },

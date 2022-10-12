@@ -29,7 +29,7 @@ export const CommunityCreate = mutationWithClientMutationId({
       };
     }
 
-    const Community = await new CommunityModel({
+    const community = await new CommunityModel({
       name,
       title,
       about,
@@ -37,23 +37,23 @@ export const CommunityCreate = mutationWithClientMutationId({
     }).save();
 
     return {
-      id: Community._id,
+      id: community._id,
       error: null,
     };
   },
   outputFields: {
-    CommunityEdge: {
+    communityEdge: {
       type: CommunityConnection.edgeType,
       resolve: async ({ id }, _, context) => {
-        const Community = await CommunityLoader.load(context, id);
+        const community = await CommunityLoader.load(context, id);
 
-        if (!Community) {
+        if (!community) {
           return null;
         }
 
         return {
-          cursor: toGlobalId('Community', Community._id),
-          node: Community,
+          cursor: toGlobalId('Community', community._id),
+          node: community,
         };
       },
     },

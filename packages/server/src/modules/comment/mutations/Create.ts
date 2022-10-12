@@ -40,30 +40,30 @@ export const CommentCreate = mutationWithClientMutationId({
       };
     }
 
-    const Comment = await new CommentModel({
+    const comment = await new CommentModel({
       content,
       post: post._id,
       author: context.user._id,
     }).save();
 
     return {
-      id: Comment._id,
+      id: comment._id,
       error: null,
     };
   },
   outputFields: {
-    CommentEdge: {
+    commentEdge: {
       type: CommentConnection.edgeType,
       resolve: async ({ id }, _, context) => {
-        const Comment = await CommentLoader.load(context, id);
+        const comment = await CommentLoader.load(context, id);
 
-        if (!Comment) {
+        if (!comment) {
           return null;
         }
 
         return {
-          cursor: toGlobalId('Comment', Comment._id),
-          node: Comment,
+          cursor: toGlobalId('Comment', comment._id),
+          node: comment,
         };
       },
     },

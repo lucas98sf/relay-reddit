@@ -12,7 +12,7 @@ type Query {
   ): [Node]!
   me: User
   posts(after: String, first: Int, before: String, last: Int): PostConnection!
-  communities(after: String, first: Int, before: String, last: Int): communityConnection!
+  communities(after: String, first: Int, before: String, last: Int): CommunityConnection!
   version: String!
 }
 
@@ -122,8 +122,8 @@ type Post implements Node {
   image: String
   url: String
   community: Community
-  comments(after: String, first: Int, before: String, last: Int): CommentConnection!
   author: User
+  comments(after: String, first: Int, before: String, last: Int): CommentConnection!
   createdAt: String
   updatedAt: String
 }
@@ -199,15 +199,15 @@ type Comment implements Node {
   """mongoose _id"""
   _id: String!
   content: String
-  votes: Int!
   post: Post
   author: User
+  votes: Int!
   createdAt: String
   updatedAt: String
 }
 
 """A connection to a list of items."""
-type communityConnection implements Connection {
+type CommunityConnection implements Connection {
   """Number of items in this connection."""
   count: Int
 
@@ -229,11 +229,11 @@ type communityConnection implements Connection {
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [communityEdge]!
+  edges: [CommunityEdge]!
 }
 
 """An edge in a connection."""
-type communityEdge {
+type CommunityEdge {
   """The item at the end of the edge."""
   node: Community
 
@@ -338,7 +338,7 @@ scalar PostTitleType
 scalar PostContentType
 
 type CommentCreatePayload {
-  CommentEdge: CommentEdge
+  commentEdge: CommentEdge
   post: Post
 
   """Default error field resolver."""
@@ -359,7 +359,7 @@ input CommentCreateInput {
 scalar CommentContentType
 
 type CommunityCreatePayload {
-  CommunityEdge: communityEdge
+  communityEdge: CommunityEdge
 
   """Default error field resolver."""
   error: String

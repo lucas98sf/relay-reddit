@@ -1,24 +1,17 @@
-import mongoose, { Model, Types } from 'mongoose';
+import mongoose, { Document, Model, Types } from 'mongoose';
 
 import ObjectId = mongoose.Schema.Types.ObjectId;
 
-export interface IVote {
+export type IVote = {
   type: 'UPVOTE' | 'DOWNVOTE';
   post?: Types.ObjectId;
   comment?: Types.ObjectId;
   author: Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
-}
+} & { _id: Types.ObjectId };
 
-interface VoteModel extends Model<IVote> {
-  countVotes: (target: { post: ObjectId } | { comment: ObjectId }) => Promise<{
-    upvotes: number;
-    downvotes: number;
-  }>;
-}
-
-const VoteSchema = new mongoose.Schema<IVote, VoteModel>(
+const VoteSchema = new mongoose.Schema<IVote>(
   {
     type: {
       type: String,
@@ -54,20 +47,28 @@ const VoteSchema = new mongoose.Schema<IVote, VoteModel>(
 
 VoteSchema.static(
   'countVotes',
-  async function countVotes(target: { post: ObjectId } | { comment: ObjectId }) {
-    const votes: Array<IVote> = await this.find(target);
-
-    const upvotes = votes.filter(vote => vote.type === 'UPVOTE').length;
-    const downvotes = votes.filter(vote => vote.type === 'DOWNVOTE').length;
-
-    return {
-      upvotes,
-      downvotes,
-      total: upvotes - downvotes,
-    };
+  async function countVotes(target: { post: Types.ObjectId } | { comment: Types.ObjectId }) {
+    const upvotes: number = await this.countDocuments({
+      ...target,
+      type: 'UPVOTE',
+    });
+    const downvotes: number = await this.countDocuments({
+      ...target,
+      type: 'DOWNVOTE',
+    });
+    return { upvotes, downvotes, total: upvotes - downvotes };
   }
 );
 
-const Vote = mongoose.models.Vote || mongoose.model<IVote, VoteModel>('Vote', VoteSchema);
+interface IVoteModel extends Model<IVote & Document> {
+  countVotes: (target: { post: Types.ObjectId } | { comment: Types.ObjectId }) => Promise<{
+    upvotes: number;
+    downvotes: number;
+    total: number;
+  }>;
+}
 
-export default Vote;
+const VoteModel: IVoteModel =
+  (mongoose.models.Vote as IVoteModel) || mongoose.model<IVote, IVoteModel>('Vote', VoteSchema);
+
+export default VoteModel;

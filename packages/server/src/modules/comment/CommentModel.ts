@@ -2,6 +2,14 @@ import mongoose, { Document, Model, Types } from 'mongoose';
 
 import ObjectId = mongoose.Schema.Types.ObjectId;
 
+export type IComment = {
+  content?: string;
+  post: Types.ObjectId;
+  author: Types.ObjectId;
+  createdAt: Date;
+  updatedAt: Date;
+} & { _id: Types.ObjectId };
+
 const CommentSchema = new mongoose.Schema(
   {
     content: {
@@ -30,15 +38,7 @@ const CommentSchema = new mongoose.Schema(
   }
 );
 
-export interface IComment extends Document {
-  content?: string;
-  post: Types.ObjectId;
-  author: Types.ObjectId;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-const CommentModel: Model<IComment> =
+const CommentModel: Model<IComment & Document> =
   mongoose.models.Comment || mongoose.model('Comment', CommentSchema);
 
 export default CommentModel;

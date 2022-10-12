@@ -1,7 +1,18 @@
 import bcrypt from 'bcryptjs';
-import mongoose, { Document, Model } from 'mongoose';
+import mongoose, { Document, Model, Types } from 'mongoose';
 
-const UserSchema = new mongoose.Schema(
+export type IUser = {
+  username: string;
+  email: string;
+  password: string;
+  avatar?: string;
+  authenticate: (plainTextPassword: string) => boolean;
+  encryptPassword: (password: string | undefined) => string;
+  createdAt: Date;
+  updatedAt: Date;
+} & { _id: Types.ObjectId };
+
+const UserSchema = new mongoose.Schema<IUser>(
   {
     username: {
       type: String,
@@ -31,18 +42,7 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
-export interface IUser extends Document {
-  username: string;
-  email: string;
-  password: string;
-  avatar?: string;
-  authenticate: (plainTextPassword: string) => boolean;
-  encryptPassword: (password: string | undefined) => string;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-UserSchema.pre<IUser>('save', function encryptPasswordHook(next) {
+UserSchema.pre<IUser & Document>('save', function encryptPasswordHook(next) {
   if (this.isModified('password')) {
     this.password = this.encryptPassword(this.password);
   }
@@ -51,7 +51,7 @@ UserSchema.pre<IUser>('save', function encryptPasswordHook(next) {
 });
 
 UserSchema.methods = {
-  authenticate(plainTextPassword: string): boolean {
+  authenticate(plainTextPassword: string) {
     return bcrypt.compareSync(plainTextPassword, this.password);
   },
   encryptPassword(password: string) {
@@ -59,6 +59,7 @@ UserSchema.methods = {
   },
 };
 
-const User: Model<IUser> = mongoose.models.User || mongoose.model('User', UserSchema);
+const UserModel: Model<IUser & Document> =
+  mongoose.models.User || mongoose.model('User', UserSchema);
 
-export default User;
+export default UserModel;

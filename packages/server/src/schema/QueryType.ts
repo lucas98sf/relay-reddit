@@ -18,7 +18,8 @@ const QueryType = new GraphQLObjectType({
     nodes: nodesField,
     me: {
       type: UserType,
-      resolve: (_, __, context) => UserLoader.load(context, context.user?._id),
+      resolve: (_, __, context) =>
+        context.user ? UserLoader.load(context, context.user._id) : null,
     },
     posts: {
       type: new GraphQLNonNull(PostConnection.connectionType),

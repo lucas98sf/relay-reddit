@@ -2,7 +2,18 @@ import mongoose, { Document, Model, Types } from 'mongoose';
 
 import ObjectId = mongoose.Schema.Types.ObjectId;
 
-const PostSchema = new mongoose.Schema(
+export type IPost = {
+  title: string;
+  content?: string;
+  image?: string;
+  url?: string;
+  author: Types.ObjectId;
+  community: Types.ObjectId;
+  createdAt: Date;
+  updatedAt: Date;
+} & { _id: Types.ObjectId };
+
+const PostSchema = new mongoose.Schema<IPost>(
   {
     title: {
       type: String,
@@ -37,17 +48,7 @@ const PostSchema = new mongoose.Schema(
   }
 );
 
-export interface IPost extends Document {
-  title: string;
-  content?: string;
-  image?: string;
-  url?: string;
-  author: Types.ObjectId;
-  community: Types.ObjectId;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-const PostModel: Model<IPost> = mongoose.models.Post || mongoose.model('Post', PostSchema);
+const PostModel: Model<IPost & Document> =
+  mongoose.models.Post || mongoose.model('Post', PostSchema);
 
 export default PostModel;

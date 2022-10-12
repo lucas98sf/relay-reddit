@@ -21,7 +21,7 @@ import UserType from '../user/UserType';
 import { load } from './PostLoader';
 import { IPost } from './PostModel';
 
-const PostType = new GraphQLObjectType<IPost & { _id: string }, GraphQLContext>({
+const PostType = new GraphQLObjectType<IPost, GraphQLContext>({
   name: 'Post',
   description: 'Post data',
   fields: () => ({
@@ -29,23 +29,27 @@ const PostType = new GraphQLObjectType<IPost & { _id: string }, GraphQLContext>(
     ...objectIdResolver,
     title: {
       type: GraphQLString,
-      resolve: post => post.title,
+      resolve: ({ title }) => title,
     },
     content: {
       type: GraphQLString,
-      resolve: post => post.content,
+      resolve: ({ content }) => content,
     },
     image: {
       type: GraphQLString,
-      resolve: post => post.image,
+      resolve: ({ image }) => image,
     },
     url: {
       type: GraphQLString,
-      resolve: post => post.url,
+      resolve: ({ url }) => url,
     },
     community: {
       type: CommunityType,
-      resolve: (post, _, context) => CommunityLoader.load(context, post.community),
+      resolve: ({ community }, _, context) => CommunityLoader.load(context, community),
+    },
+    author: {
+      type: UserType,
+      resolve: ({ author }, _, context) => UserLoader.load(context, author),
     },
     comments: {
       type: new GraphQLNonNull(CommentConnection.connectionType),
@@ -59,10 +63,6 @@ const PostType = new GraphQLObjectType<IPost & { _id: string }, GraphQLContext>(
             post: post._id,
           })
         ),
-    },
-    author: {
-      type: UserType,
-      resolve: (post, _, context) => UserLoader.load(context, post.author),
     },
     ...timestampResolver,
   }),

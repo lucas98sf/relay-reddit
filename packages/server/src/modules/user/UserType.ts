@@ -17,7 +17,7 @@ import { PostConnection } from '../post/PostType';
 import { load } from './UserLoader';
 import { IUser } from './UserModel';
 
-const UserType = new GraphQLObjectType<IUser & { _id: string }, GraphQLContext>({
+const UserType = new GraphQLObjectType<IUser, GraphQLContext>({
   name: 'User',
   description: 'User data',
   fields: () => ({
@@ -25,15 +25,15 @@ const UserType = new GraphQLObjectType<IUser & { _id: string }, GraphQLContext>(
     ...objectIdResolver,
     username: {
       type: GraphQLString,
-      resolve: user => user.username,
+      resolve: ({ username }) => username,
     },
     email: {
       type: GraphQLString,
-      resolve: user => user.email,
+      resolve: ({ email }) => email,
     },
     avatar: {
       type: GraphQLString,
-      resolve: user => user.avatar,
+      resolve: ({ avatar }) => avatar,
     },
     posts: {
       type: new GraphQLNonNull(PostConnection.connectionType),

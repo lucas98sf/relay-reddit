@@ -2,7 +2,16 @@ import mongoose, { Document, Model, Types } from 'mongoose';
 
 import ObjectId = mongoose.Schema.Types.ObjectId;
 
-const CommunitySchema = new mongoose.Schema(
+export type ICommunity = {
+  name: string;
+  title: string;
+  about: string;
+  owner: Types.ObjectId;
+  createdAt: Date;
+  updatedAt: Date;
+} & { _id: Types.ObjectId };
+
+const CommunitySchema = new mongoose.Schema<ICommunity>(
   {
     name: {
       type: String,
@@ -31,16 +40,7 @@ const CommunitySchema = new mongoose.Schema(
   }
 );
 
-export interface ICommunity extends Document {
-  name: string;
-  title: string;
-  about: string;
-  owner: Types.ObjectId;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-const CommunityModel: Model<ICommunity> =
+const CommunityModel: Model<ICommunity & Document> =
   mongoose.models.Community || mongoose.model('Community', CommunitySchema);
 
 export default CommunityModel;
