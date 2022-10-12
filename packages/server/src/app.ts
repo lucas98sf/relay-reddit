@@ -13,6 +13,7 @@ import bodyParser from 'koa-bodyparser';
 import logger from 'koa-logger';
 
 import { getUser } from './auth';
+import { config } from './config';
 import { getContext } from './getContext';
 import { schema } from './schema';
 import { setCookie } from './util/setCookie';
@@ -43,6 +44,7 @@ router.all('/graphql', async ctx => {
   if (shouldRenderGraphiQL(request)) {
     ctx.body = renderGraphiQL({
       shouldPersistHeaders: true,
+      headers: JSON.stringify({ authorization: ctx.cookies.get(config.TOKEN_COOKIE) }),
     });
   } else {
     const { operationName, query, variables } = getGraphQLParameters(request);
