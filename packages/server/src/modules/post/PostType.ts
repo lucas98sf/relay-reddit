@@ -1,20 +1,25 @@
 import {
+  connectionArgs,
   connectionDefinitions,
   objectIdResolver,
   timestampResolver,
+  withFilter,
 } from '@entria/graphql-mongo-helpers';
-import { GraphQLObjectType, GraphQLString } from 'graphql';
+import { GraphQLNonNull, GraphQLObjectType, GraphQLString } from 'graphql';
 import { globalIdField } from 'graphql-relay';
 
+import { nodeInterface, registerTypeLoader } from '@/graphql/typeRegister';
+import { GraphQLContext } from '@/graphql/types';
+
+import * as CommentLoader from '../comment/CommentLoader';
+import { CommentConnection } from '../comment/CommentType';
+import * as CommunityLoader from '../community/CommunityLoader';
+import CommunityType from '../community/CommunityType';
 import * as UserLoader from '../user/UserLoader';
-// eslint-disable-next-line import/no-cycle
 import UserType from '../user/UserType';
 
 import { load } from './PostLoader';
 import { IPost } from './PostModel';
-
-import { nodeInterface, registerTypeLoader } from '@/graphql/typeRegister';
-import { GraphQLContext } from '@/graphql/types';
 
 const PostType = new GraphQLObjectType<IPost & { _id: string }, GraphQLContext>({
   name: 'Post',
@@ -34,13 +39,26 @@ const PostType = new GraphQLObjectType<IPost & { _id: string }, GraphQLContext>(
       type: GraphQLString,
       resolve: post => post.image,
     },
-    // community: {
-    //   type: CommunityType,
-    //   resolve: (post, _, context) => CommunityLoader.load(context, post.community),
-    // },
     url: {
       type: GraphQLString,
       resolve: post => post.url,
+    },
+    community: {
+      type: CommunityType,
+      resolve: (post, _, context) => CommunityLoader.load(context, post.community),
+    },
+    comments: {
+      type: new GraphQLNonNull(CommentConnection.connectionType),
+      args: {
+        ...connectionArgs,
+      },
+      resolve: async (post, args, context) =>
+        CommentLoader.loadAll(
+          context,
+          withFilter(args, {
+            post: post._id,
+          })
+        ),
     },
     author: {
       type: UserType,

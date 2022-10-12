@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
-import { DataLoaders } from './loaderRegister';
-
 import { IUser } from '@/modules/user/UserModel';
+
+import { DataLoaders } from './loaderRegister';
 
 declare type ObjectId = mongoose.Schema.Types.ObjectId;
 

@@ -2,7 +2,10 @@ import { connectionArgs } from '@entria/graphql-mongo-helpers';
 import { GraphQLObjectType, GraphQLNonNull, GraphQLString } from 'graphql';
 
 import pkg from '@/../package.json';
+
 import { nodesField, nodeField } from '@/graphql/typeRegister';
+import * as CommunityLoader from '@/modules/community/CommunityLoader';
+import { CommunityConnection } from '@/modules/community/CommunityType';
 import * as PostLoader from '@/modules/post/PostLoader';
 import { PostConnection } from '@/modules/post/PostType';
 import * as UserLoader from '@/modules/user/UserLoader';
@@ -23,6 +26,13 @@ const QueryType = new GraphQLObjectType({
         ...connectionArgs,
       },
       resolve: async (_, args, context) => PostLoader.loadAll(context, args),
+    },
+    communities: {
+      type: new GraphQLNonNull(CommunityConnection.connectionType),
+      args: {
+        ...connectionArgs,
+      },
+      resolve: async (_, args, context) => CommunityLoader.loadAll(context, args),
     },
     version: {
       type: new GraphQLNonNull(GraphQLString),

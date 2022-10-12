@@ -22,6 +22,11 @@ const PostSchema = new mongoose.Schema(
       ref: 'User',
       required: true,
     },
+    community: {
+      type: ObjectId,
+      ref: 'Community',
+      required: true,
+    },
   },
   {
     timestamps: {
@@ -38,6 +43,7 @@ export interface IPost extends Document {
   image?: string;
   url?: string;
   author: Types.ObjectId;
+  community: Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
 }

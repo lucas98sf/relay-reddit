@@ -2,12 +2,12 @@ import { errorField, successField } from '@entria/graphql-mongo-helpers';
 import { mutationWithClientMutationId } from 'graphql-relay';
 import { GraphQLNonEmptyString } from 'graphql-scalars';
 
+import { generateToken } from '@/auth';
+import { config } from '@/config';
+
 import * as UserLoader from '../UserLoader';
 import User from '../UserModel';
 import UserType from '../UserType';
-
-import { generateToken } from '@/auth';
-import { config } from '@/config';
 
 export const UserLogin = mutationWithClientMutationId({
   name: 'UserLogin',

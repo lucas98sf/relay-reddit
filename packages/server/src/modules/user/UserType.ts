@@ -8,15 +8,14 @@ import {
 import { GraphQLObjectType, GraphQLString, GraphQLNonNull } from 'graphql';
 import { globalIdField } from 'graphql-relay';
 
+import { nodeInterface, registerTypeLoader } from '@/graphql/typeRegister';
+import { GraphQLContext } from '@/graphql/types';
+
 import * as PostLoader from '../post/PostLoader';
-// eslint-disable-next-line import/no-cycle
 import { PostConnection } from '../post/PostType';
 
 import { load } from './UserLoader';
 import { IUser } from './UserModel';
-
-import { nodeInterface, registerTypeLoader } from '@/graphql/typeRegister';
-import { GraphQLContext } from '@/graphql/types';
 
 const UserType = new GraphQLObjectType<IUser & { _id: string }, GraphQLContext>({
   name: 'User',

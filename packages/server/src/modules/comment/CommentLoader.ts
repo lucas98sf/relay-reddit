@@ -2,20 +2,20 @@ import { createLoader } from '@entria/graphql-mongo-helpers';
 
 import { registerLoader } from '@/graphql/loaderRegister';
 
-import UserModel from './UserModel';
+import CommentModel from './CommentModel';
 
 const {
-  Wrapper: User,
+  Wrapper: Comment,
   getLoader,
   clearCache,
   load,
   loadAll,
 } = createLoader({
-  model: UserModel,
-  loaderName: 'UserLoader',
+  model: CommentModel,
+  loaderName: 'CommentLoader',
 });
 
 export { getLoader, clearCache, load, loadAll };
-export default User;
+export default Comment;
 
-registerLoader('UserLoader', getLoader);
+registerLoader('CommentLoader', getLoader);

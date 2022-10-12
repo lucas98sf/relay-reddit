@@ -1,8 +1,8 @@
 import { createLoader } from '@entria/graphql-mongo-helpers';
 
-import PostModel from './PostModel';
-
 import { registerLoader } from '@/graphql/loaderRegister';
+
+import PostModel from './PostModel';
 
 const {
   Wrapper: Post,
