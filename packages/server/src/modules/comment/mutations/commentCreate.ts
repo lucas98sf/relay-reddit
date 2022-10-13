@@ -48,7 +48,7 @@ export const CommentCreate = mutationWithClientMutationId({
 
     return {
       id: comment._id,
-      error: null,
+      success: 'Comment created',
     };
   },
   outputFields: {

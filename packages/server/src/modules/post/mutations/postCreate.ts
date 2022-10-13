@@ -62,7 +62,7 @@ export const PostCreate = mutationWithClientMutationId({
 
     return {
       id: post._id,
-      error: null,
+      success: 'Post created',
     };
   },
   outputFields: {

@@ -10,7 +10,11 @@ import { globalIdField } from 'graphql-relay';
 
 import { nodeInterface, registerTypeLoader } from '@/graphql/typeRegister';
 import { GraphQLContext } from '@/graphql/types';
+import * as CommunityLoader from '@/modules/community/CommunityLoader';
 
+import * as CommentLoader from '../comment/CommentLoader';
+import { CommentConnection } from '../comment/CommentType';
+import { CommunityConnection } from '../community/CommunityType';
 import * as PostLoader from '../post/PostLoader';
 import { PostConnection } from '../post/PostType';
 
@@ -45,6 +49,32 @@ const UserType = new GraphQLObjectType<IUser, GraphQLContext>({
           context,
           withFilter(args, {
             author: user._id,
+          })
+        ),
+    },
+    comments: {
+      type: new GraphQLNonNull(CommentConnection.connectionType),
+      args: {
+        ...connectionArgs,
+      },
+      resolve: async (user, args, context) =>
+        CommentLoader.loadAll(
+          context,
+          withFilter(args, {
+            author: user._id,
+          })
+        ),
+    },
+    communities: {
+      type: new GraphQLNonNull(CommunityConnection.connectionType),
+      args: {
+        ...connectionArgs,
+      },
+      resolve: async (user, args, context) =>
+        CommunityLoader.loadAll(
+          context,
+          withFilter(args, {
+            members: user._id,
           })
         ),
     },

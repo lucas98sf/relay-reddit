@@ -17,7 +17,7 @@ export const voteFilterMapping = {
 };
 
 const VoteFilterInputType = new GraphQLInputObjectType({
-  name: 'voteFilter',
+  name: 'VoteFilter',
   description: 'Used to filter votes',
   fields: () => ({
     user: {

@@ -5,7 +5,7 @@ import {
   timestampResolver,
   withFilter,
 } from '@entria/graphql-mongo-helpers';
-import { GraphQLNonNull, GraphQLObjectType, GraphQLString } from 'graphql';
+import { GraphQLInt, GraphQLNonNull, GraphQLObjectType, GraphQLString } from 'graphql';
 import { globalIdField } from 'graphql-relay';
 
 import { nodeInterface, registerTypeLoader } from '@/graphql/typeRegister';
@@ -17,6 +17,7 @@ import * as CommunityLoader from '../community/CommunityLoader';
 import CommunityType from '../community/CommunityType';
 import * as UserLoader from '../user/UserLoader';
 import UserType from '../user/UserType';
+import VoteModel from '../vote/VoteModel';
 
 import { load } from './PostLoader';
 import { IPost } from './PostModel';
@@ -50,6 +51,11 @@ const PostType = new GraphQLObjectType<IPost, GraphQLContext>({
     author: {
       type: UserType,
       resolve: ({ author }, _, context) => UserLoader.load(context, author),
+    },
+    votesCount: {
+      type: new GraphQLNonNull(GraphQLInt),
+      resolve: async ({ _id }) => (await VoteModel.countVotes({ post: _id }))?.total,
+      description: 'Total votes count (upvotes - downvotes)',
     },
     comments: {
       type: new GraphQLNonNull(CommentConnection.connectionType),

@@ -27,8 +27,12 @@ export const UserRegister = mutationWithClientMutationId({
     },
   },
   mutateAndGetPayload: async ({ username, email, password, avatar }, context) => {
-    const hasUser = (await User.countDocuments({ email: email.trim().toLowerCase() })) > 0;
-    if (hasUser) return { error: 'Email already in use' };
+    const hasUserEmail = (await User.countDocuments({ email: email.trim().toLowerCase() })) > 0;
+    if (hasUserEmail) return { error: 'email already in use' };
+
+    const hasUsername =
+      (await User.countDocuments({ username: new RegExp(username.trim(), 'i') })) > 0;
+    if (hasUsername) return { error: 'username already in use' };
 
     const user = await new User({
       username,

@@ -38,7 +38,7 @@ export const CommunityCreate = mutationWithClientMutationId({
 
     return {
       id: community._id,
-      error: null,
+      success: 'Community created',
     };
   },
   outputFields: {

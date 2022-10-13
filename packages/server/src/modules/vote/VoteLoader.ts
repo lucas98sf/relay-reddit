@@ -2,6 +2,7 @@ import { createLoader } from '@entria/graphql-mongo-helpers';
 
 import { registerLoader } from '@/graphql/loaderRegister';
 
+import { voteFilterMapping } from './VoteFilterInputType';
 import VoteModel from './VoteModel';
 
 const {
@@ -13,6 +14,7 @@ const {
 } = createLoader({
   model: VoteModel,
   loaderName: 'VoteLoader',
+  filterMapping: voteFilterMapping,
 });
 
 export { getLoader, clearCache, load, loadAll };

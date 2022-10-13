@@ -1,11 +1,14 @@
 import bcrypt from 'bcryptjs';
 import mongoose, { Document, Model, Types } from 'mongoose';
 
+import ObjectId = mongoose.Schema.Types.ObjectId;
+
 export type IUser = {
   username: string;
   email: string;
   password: string;
   avatar?: string;
+  communities: Types.ObjectId[];
   authenticate: (plainTextPassword: string) => boolean;
   encryptPassword: (password: string | undefined) => string;
   createdAt: Date;
@@ -31,6 +34,11 @@ const UserSchema = new mongoose.Schema<IUser>(
     },
     avatar: {
       type: String,
+    },
+    communities: {
+      type: [ObjectId],
+      ref: 'Community',
+      default: [],
     },
   },
   {

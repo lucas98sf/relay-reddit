@@ -1,9 +1,10 @@
 import { errorField, getObjectId, successField } from '@entria/graphql-mongo-helpers';
-import { GraphQLID, GraphQLNonNull, GraphQLEnumType } from 'graphql';
+import { GraphQLID, GraphQLEnumType } from 'graphql';
 import { mutationWithClientMutationId } from 'graphql-relay';
 
 import { GraphQLContext } from '@/graphql/types';
 import * as CommentLoader from '@/modules/comment/CommentLoader';
+import CommentModel from '@/modules/comment/CommentModel';
 import CommentType from '@/modules/comment/CommentType';
 import * as PostLoader from '@/modules/post/PostLoader';
 import PostModel from '@/modules/post/PostModel';
@@ -15,10 +16,10 @@ export const VoteCreate = mutationWithClientMutationId({
   name: 'VoteCreate',
   inputFields: {
     postId: {
-      type: new GraphQLNonNull(GraphQLID),
+      type: GraphQLID,
     },
     commentId: {
-      type: new GraphQLNonNull(GraphQLID),
+      type: GraphQLID,
     },
     type: {
       type: new GraphQLEnumType({
@@ -38,15 +39,20 @@ export const VoteCreate = mutationWithClientMutationId({
       };
     }
 
-    const noIdError = {
-      error: 'postId or commentId is required',
-    };
-
     if (!postId && !commentId) {
-      return noIdError;
+      return {
+        error: 'either postId or commentId are required',
+      };
     }
 
-    let idQuery: { post: string } | { comment: string } | null = null;
+    if (postId && commentId) {
+      return {
+        error: 'only one of postId or commentId are required',
+      };
+    }
+
+    type ObjectId = typeof context.user._id;
+    let voteTarget: { post: ObjectId } | { comment: ObjectId } | undefined;
     if (postId) {
       const post = await PostModel.findOne({
         _id: getObjectId(postId),
@@ -57,9 +63,9 @@ export const VoteCreate = mutationWithClientMutationId({
           error: 'post not found',
         };
       }
-      idQuery = { post: post._id };
+      voteTarget = { post: post._id };
     } else if (commentId) {
-      const comment = await PostModel.findOne({
+      const comment = await CommentModel.findOne({
         _id: getObjectId(commentId),
       });
 
@@ -68,27 +74,32 @@ export const VoteCreate = mutationWithClientMutationId({
           error: 'comment not found',
         };
       }
-      idQuery = { comment: comment._id };
+      voteTarget = { comment: comment._id };
     }
 
-    if (!idQuery) {
-      return noIdError;
-    }
-
-    const hasLiked = await VoteModel.findOne({
-      ...idQuery,
+    const hasVoted = await VoteModel.findOne({
+      ...voteTarget,
       user: context.user._id,
     });
 
-    if (hasLiked) {
+    if (hasVoted) {
+      if (hasVoted.type !== type) {
+        await VoteModel.findByIdAndUpdate(hasVoted._id, {
+          type,
+        });
+        return {
+          id: hasVoted._id,
+          success: `Vote updated to ${type}`,
+        };
+      }
       return {
-        id: Object.values(idQuery)[0],
-        success: 'Already liked',
+        id: hasVoted._id,
+        success: 'Already voted',
       };
     }
 
     const vote = await new VoteModel({
-      ...idQuery,
+      ...voteTarget,
       type,
       author: context.user._id,
     }).save();
@@ -96,6 +107,7 @@ export const VoteCreate = mutationWithClientMutationId({
     return {
       id: vote._id,
       error: null,
+      success: `${type} created`,
     };
   },
   outputFields: {

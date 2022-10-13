@@ -36,9 +36,10 @@ const CommentType = new GraphQLObjectType<IComment, GraphQLContext>({
       type: UserType,
       resolve: ({ author }, _, context) => UserLoader.load(context, author),
     },
-    votes: {
+    votesCount: {
       type: new GraphQLNonNull(GraphQLInt),
       resolve: async ({ _id }) => (await VoteModel.countVotes({ comment: _id }))?.total,
+      description: 'Total votes count (upvotes - downvotes)',
     },
     ...timestampResolver,
   }),

@@ -13,7 +13,7 @@ import { GraphQLContext } from '@/graphql/types';
 import * as PostLoader from '../post/PostLoader';
 import { PostConnection } from '../post/PostType';
 import * as UserLoader from '../user/UserLoader';
-import UserType from '../user/UserType';
+import UserType, { UserConnection } from '../user/UserType';
 
 import { load } from './CommunityLoader';
 import { ICommunity } from './CommunityModel';
@@ -39,6 +39,19 @@ const CommunityType = new GraphQLObjectType<ICommunity, GraphQLContext>({
     owner: {
       type: UserType,
       resolve: ({ owner }, _, context) => UserLoader.load(context, owner),
+    },
+    members: {
+      type: new GraphQLNonNull(UserConnection.connectionType),
+      args: {
+        ...connectionArgs,
+      },
+      resolve: async (community, args, context) =>
+        UserLoader.loadAll(
+          context,
+          withFilter(args, {
+            community: community._id,
+          })
+        ),
     },
     posts: {
       type: new GraphQLNonNull(PostConnection.connectionType),

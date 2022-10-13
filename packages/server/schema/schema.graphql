@@ -33,6 +33,8 @@ type User implements Node {
   email: String
   avatar: String
   posts(after: String, first: Int, before: String, last: Int): PostConnection!
+  comments(after: String, first: Int, before: String, last: Int): CommentConnection!
+  communities(after: String, first: Int, before: String, last: Int): CommunityConnection!
   createdAt: String
   updatedAt: String
 }
@@ -123,6 +125,9 @@ type Post implements Node {
   url: String
   community: Community
   author: User
+
+  """Total votes count (upvotes - downvotes)"""
+  votesCount: Int!
   comments(after: String, first: Int, before: String, last: Int): CommentConnection!
   createdAt: String
   updatedAt: String
@@ -139,6 +144,19 @@ type Community implements Node {
   title: String
   about: String
   owner: User
+  members(
+    """Returns the items in the list that come after the specified cursor."""
+    after: String
+
+    """Returns the first n items from the list."""
+    first: Int
+
+    """Returns the items in the list that come before the specified cursor."""
+    before: String
+
+    """Returns the last n items from the list."""
+    last: Int
+  ): UserConnection!
   posts(
     """Returns the items in the list that come after the specified cursor."""
     after: String
@@ -154,6 +172,41 @@ type Community implements Node {
   ): PostConnection!
   createdAt: String
   updatedAt: String
+}
+
+"""A connection to a list of items."""
+type UserConnection implements Connection {
+  """Number of items in this connection."""
+  count: Int
+
+  """
+  A count of the total number of objects in this connection, ignoring pagination.
+  This allows a client to fetch the first five objects by passing "5" as the
+  argument to "first", then fetch the total count so it could display "5 of 83",
+  for example.
+  """
+  totalCount: Int
+
+  """Offset from start."""
+  startCursorOffset: Int!
+
+  """Offset till end."""
+  endCursorOffset: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [UserEdge]!
+}
+
+"""An edge in a connection."""
+type UserEdge {
+  """The item at the end of the edge."""
+  node: User
+
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 """A connection to a list of items."""
@@ -201,7 +254,9 @@ type Comment implements Node {
   content: String
   post: Post
   author: User
-  votes: Int!
+
+  """Total votes count (upvotes - downvotes)"""
+  votesCount: Int!
   createdAt: String
   updatedAt: String
 }
@@ -248,6 +303,7 @@ type Mutation {
   CommentCreate(input: CommentCreateInput!): CommentCreatePayload
   CommunityCreate(input: CommunityCreateInput!): CommunityCreatePayload
   VoteCreate(input: VoteCreateInput!): VoteCreatePayload
+  VoteDelete(input: VoteDeleteInput!): VoteDeletePayload
 }
 
 type UserLoginPayload {
@@ -395,8 +451,8 @@ type VoteCreatePayload {
 }
 
 input VoteCreateInput {
-  postId: ID!
-  commentId: ID!
+  postId: ID
+  commentId: ID
   type: VoteType
   clientMutationId: String
 }
@@ -404,4 +460,18 @@ input VoteCreateInput {
 enum VoteType {
   UPVOTE
   DOWNVOTE
+}
+
+type VoteDeletePayload {
+  """Default error field resolver."""
+  error: String
+
+  """Default success field resolver."""
+  success: String
+  clientMutationId: String
+}
+
+input VoteDeleteInput {
+  voteId: ID
+  clientMutationId: String
 }

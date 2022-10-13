@@ -7,6 +7,7 @@ export type ICommunity = {
   title: string;
   about: string;
   owner: Types.ObjectId;
+  members: Types.ObjectId[];
   createdAt: Date;
   updatedAt: Date;
 } & { _id: Types.ObjectId };
@@ -23,6 +24,11 @@ const CommunitySchema = new mongoose.Schema<ICommunity>(
     },
     about: {
       type: String,
+      required: true,
+    },
+    members: {
+      type: [ObjectId],
+      ref: 'User',
       required: true,
     },
     owner: {
