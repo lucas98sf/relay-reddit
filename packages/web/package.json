@@ -1,5 +1,5 @@
 {
-  "name": "@relay-app/web",
+  "name": "@relay-reddit/web",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -16,7 +16,7 @@
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@fontsource/ibm-plex-sans": "^4.5.13",
-    "@relay-app/ui": "*",
+    "@relay-reddit/ui": "*",
     "framer-motion": "^6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

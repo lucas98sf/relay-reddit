@@ -8,11 +8,11 @@ type PostTextProps = {
   link: string;
 };
 
-export function PostText({ post, link }: PostTextProps) {
+export function PostText({ post: { title, community, author, createdAt }, link }: PostTextProps) {
   return (
     <Box>
       <Text as={Link} textStyle="h3" to={link}>
-        {post.title}
+        {title}
       </Text>
       <Flex
         alignItems="flex-start"
@@ -29,9 +29,9 @@ export function PostText({ post, link }: PostTextProps) {
             fontWeight="700"
             lineHeight="20px"
             color="brand.200"
-            to={`r/${post.community}`}
+            to={`r/${community.name}`}
           >
-            {`r/${post.community}`}
+            {`r/${community.name}`}
           </Text>
           <Text fontSize="8px" alignSelf="center">
             •
@@ -39,8 +39,8 @@ export function PostText({ post, link }: PostTextProps) {
         </Flex>
         <Flex alignSelf="center" flexDirection="row" gap={1}>
           <Text>Posted by</Text>
-          <Text as={Link} textStyle="a" to={`u/${post.author}`}>{`u/${post.author}`}</Text>
-          <Text>{`${timeAgo(new Date(post.createdAt))} ago`}</Text>
+          <Text as={Link} textStyle="a" to={`u/${author.username}`}>{`u/${author.username}`}</Text>
+          <Text>{`${timeAgo(new Date(createdAt))} ago`}</Text>
         </Flex>
       </Flex>
     </Box>

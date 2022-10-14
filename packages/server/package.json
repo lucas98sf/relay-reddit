@@ -1,5 +1,5 @@
 {
-  "name": "@relay-app/server",
+  "name": "@relay-reddit/server",
   "version": "1.0.0",
   "private": true,
   "scripts": {

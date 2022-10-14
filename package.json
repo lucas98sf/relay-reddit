@@ -1,5 +1,5 @@
 {
-  "name": "relay-app",
+  "name": "relay-reddit",
   "version": "1.0.0",
   "private": true,
   "license": "MIT",
@@ -8,15 +8,15 @@
   ],
   "scripts": {
     "build": "concurrently \"yarn build:server\" \"yarn build:web\"",
-    "build:server": "yarn workspace @relay-app/server build",
-    "build:web": "yarn workspace @relay-app/web build",
+    "build:server": "yarn workspace @relay-reddit/server build",
+    "build:web": "yarn workspace @relay-reddit/web build",
     "clear": "npm exec --workspaces -- npx rimraf node_modules && npx rimraf node_modules",
     "dev": "concurrently \"yarn dev:server\" \"yarn dev:web\"",
-    "dev:server": "yarn workspace @relay-app/server dev",
-    "dev:web": "yarn workspace @relay-app/web dev",
+    "dev:server": "yarn workspace @relay-reddit/server dev",
+    "dev:web": "yarn workspace @relay-reddit/web dev",
     "lint": "eslint --fix . && prettier --write .",
     "prepare": "husky install",
-    "update-schema": "yarn workspace @relay-app/server update-schema"
+    "update-schema": "yarn workspace @relay-reddit/server update-schema"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

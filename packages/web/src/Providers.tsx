@@ -1,6 +1,6 @@
 import '@fontsource/ibm-plex-sans';
 import { ChakraProvider } from '@chakra-ui/react';
-import { theme } from '@relay-app/ui';
+import { theme } from '@relay-reddit/ui';
 import { RelayEnvironmentProvider } from 'react-relay';
 
 import { RelayEnvironment } from './relay';

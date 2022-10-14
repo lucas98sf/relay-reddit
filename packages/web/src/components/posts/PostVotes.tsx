@@ -1,5 +1,5 @@
 import { Flex, Text } from '@chakra-ui/react';
-import { UpvoteButton } from '@relay-app/ui';
+import { UpvoteButton } from '@relay-reddit/ui';
 
 import { shortNumber } from '@/util/numberShortener';
 
@@ -17,7 +17,7 @@ export function PostVotes({ votes }: PostVotesProps) {
     >
       <UpvoteButton aria-label="upvote" direction="up" />
       <Text fontSize="sm" fontWeight="bold">
-        {shortNumber(votes)}
+        {votes ? shortNumber(votes) : 'Vote'}
       </Text>
       <UpvoteButton aria-label="down" direction="down" />
     </Flex>

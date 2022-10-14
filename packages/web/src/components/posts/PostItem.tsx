@@ -11,7 +11,7 @@ type PostItemProps = {
 };
 
 export function PostItem({ post, isLast, isFirst }: PostItemProps) {
-  const link = `/r/${post.community}/${post.id}`;
+  const link = `/r/${post.community.name}/${post.id}`;
 
   return (
     <Flex
@@ -30,7 +30,7 @@ export function PostItem({ post, isLast, isFirst }: PostItemProps) {
       flexDirection="row"
       textAlign="left"
     >
-      <PostVotes votes={post.votes} />
+      <PostVotes votes={post.votesCount} />
       <Image
         src={post.image}
         minWidth="100px"

@@ -1,5 +1,5 @@
 import { Input } from '@chakra-ui/react';
-import { Card } from '@relay-app/ui';
+import { Card } from '@relay-reddit/ui';
 import { useNavigate } from 'react-router-dom';
 
 export function CreatePostButton() {

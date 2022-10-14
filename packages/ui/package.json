@@ -1,5 +1,5 @@
 {
-  "name": "@relay-app/ui",
+  "name": "@relay-reddit/ui",
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {

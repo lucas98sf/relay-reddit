@@ -1,4 +1,4 @@
-import { List } from '@relay-app/ui';
+import { List } from '@relay-reddit/ui';
 import { graphql, useLazyLoadQuery } from 'react-relay';
 
 import { PostItem } from './PostItem';
@@ -18,9 +18,13 @@ export function PostList() {
               image
               createdAt
               updatedAt
-              author {
-                id
+              community {
+                name
               }
+              author {
+                username
+              }
+              votesCount
             }
           }
         }
