@@ -60,7 +60,7 @@ VoteSchema.static(
   }
 );
 
-interface IVoteModel extends Model<IVote & Document> {
+interface IVoteModel extends Model<IVote> {
   countVotes: (target: { post: Types.ObjectId } | { comment: Types.ObjectId }) => Promise<{
     upvotes: number;
     downvotes: number;

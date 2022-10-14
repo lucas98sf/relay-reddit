@@ -1,4 +1,5 @@
 import { createLoader } from '@entria/graphql-mongo-helpers';
+import { Document } from 'mongoose';
 
 import { registerLoader } from '@/graphql/loaderRegister';
 
@@ -11,7 +12,7 @@ const {
   load,
   loadAll,
 } = createLoader({
-  model: PostModel,
+  model: PostModel as typeof PostModel & Document,
   loaderName: 'PostLoader',
 });
 

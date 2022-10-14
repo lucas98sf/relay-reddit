@@ -1,4 +1,4 @@
-import mongoose, { Document, Model, Types } from 'mongoose';
+import mongoose, { Model, Types } from 'mongoose';
 
 import ObjectId = mongoose.Schema.Types.ObjectId;
 
@@ -48,7 +48,6 @@ const PostSchema = new mongoose.Schema<IPost>(
   }
 );
 
-const PostModel: Model<IPost & Document> =
-  mongoose.models.Post || mongoose.model('Post', PostSchema);
+const PostModel: Model<IPost> = mongoose.models.Post || mongoose.model('Post', PostSchema);
 
 export default PostModel;

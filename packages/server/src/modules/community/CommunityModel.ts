@@ -1,4 +1,4 @@
-import mongoose, { Document, Model, Types } from 'mongoose';
+import mongoose, { Model, Types } from 'mongoose';
 
 import ObjectId = mongoose.Schema.Types.ObjectId;
 
@@ -46,7 +46,7 @@ const CommunitySchema = new mongoose.Schema<ICommunity>(
   }
 );
 
-const CommunityModel: Model<ICommunity & Document> =
+const CommunityModel: Model<ICommunity> =
   mongoose.models.Community || mongoose.model('Community', CommunitySchema);
 
 export default CommunityModel;

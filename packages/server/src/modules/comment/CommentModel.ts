@@ -1,4 +1,4 @@
-import mongoose, { Document, Model, Types } from 'mongoose';
+import mongoose, { Model, Types } from 'mongoose';
 
 import ObjectId = mongoose.Schema.Types.ObjectId;
 
@@ -38,7 +38,7 @@ const CommentSchema = new mongoose.Schema(
   }
 );
 
-const CommentModel: Model<IComment & Document> =
+const CommentModel: Model<IComment> =
   mongoose.models.Comment || mongoose.model('Comment', CommentSchema);
 
 export default CommentModel;

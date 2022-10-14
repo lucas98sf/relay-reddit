@@ -9,10 +9,10 @@ export type IUser = {
   password: string;
   avatar?: string;
   communities: Types.ObjectId[];
-  authenticate: (plainTextPassword: string) => boolean;
-  encryptPassword: (password: string | undefined) => string;
   createdAt: Date;
   updatedAt: Date;
+  authenticate: (plainTextPassword: string) => boolean;
+  encryptPassword: (password: string | undefined) => string;
 } & { _id: Types.ObjectId };
 
 const UserSchema = new mongoose.Schema<IUser>(
@@ -67,7 +67,6 @@ UserSchema.methods = {
   },
 };
 
-const UserModel: Model<IUser & Document> =
-  mongoose.models.User || mongoose.model('User', UserSchema);
+const UserModel: Model<IUser> = mongoose.models.User || mongoose.model('User', UserSchema);
 
 export default UserModel;
