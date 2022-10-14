@@ -5,11 +5,11 @@ import { getDataloaders } from './graphql/loaderRegister';
 import { GraphQLContext } from './graphql/types';
 import { IUser } from './modules/user/UserModel';
 
-type ContextVars = {
+export type ContextVars = {
   user?: IUser | null;
   req?: Request;
-  koaContext: Context;
-  setCookie: (cookieName: string, token: string) => void;
+  koaContext?: Context;
+  setCookie?: (cookieName: string, token: string) => void;
 };
 
 export const getContext = async (ctx: ContextVars) => {

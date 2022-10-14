@@ -5,10 +5,12 @@ import dotenvSafe from 'dotenv-safe';
 
 const root = path.join.bind(process.cwd());
 
-dotenvSafe.config({
-  path: root('.env'),
-  sample: root('.env.example'),
-});
+if (process.env.NODE_ENV !== 'test') {
+  dotenvSafe.config({
+    path: root('.env'),
+    sample: root('.env.example'),
+  });
+}
 
 const ENV = process.env;
 

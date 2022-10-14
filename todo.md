@@ -1,7 +1,7 @@
 ### web
 
 - [ ] auth provider
-- [ ] ui
+- [x] ui
 - [ ] ...
 
 ### server
