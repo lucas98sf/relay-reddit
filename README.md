@@ -1,4 +1,4 @@
-# Relay Reddit Clone (WIP ⚒️)
+# FullStack Reddit Clone (WIP ⚒️)
 
 ## Built with
 
