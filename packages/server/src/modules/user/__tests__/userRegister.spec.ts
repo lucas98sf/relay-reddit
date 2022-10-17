@@ -33,6 +33,7 @@ describe('User register', () => {
     expect(result.me.username).toBe(userRegisterInput.username);
     expect(result.me.email).toBe(userRegisterInput.email);
   });
+
   it('should return error and error when username is already in use', async () => {
     await createUser({ ...userRegisterInput, email: 'different@email.com' });
     const result = await mutation(
@@ -48,6 +49,7 @@ describe('User register', () => {
     expect(result.error).toBe('username already in use');
     expect(result.me).toBeNull();
   });
+
   it('should return error and error when email is already in use', async () => {
     await createUser({ ...userRegisterInput, username: 'different_user' });
     const result = await mutation(

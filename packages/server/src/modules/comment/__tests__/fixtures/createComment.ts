@@ -1,3 +1,5 @@
+import { getObjectId } from '@entria/graphql-mongo-helpers';
+
 import Comment, { IComment } from '../../CommentModel';
 
 export const commentCreateInput: Pick<IComment, 'content'> = {
@@ -9,6 +11,11 @@ export const createComment = async (
   postId: string,
   input = commentCreateInput
 ) => {
-  const comment = await new Comment({ author: authorId, post: postId, ...input }).save();
+  const comment = await new Comment({
+    author: getObjectId(authorId),
+    post: getObjectId(postId),
+    ...input,
+  }).save();
+
   return comment;
 };

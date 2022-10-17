@@ -1,3 +1,5 @@
+import { getObjectId } from '@entria/graphql-mongo-helpers';
+
 import Vote, { IVote } from '../../VoteModel';
 
 export const createVote = async (
@@ -5,6 +7,11 @@ export const createVote = async (
   type: IVote['type'],
   id: { post?: string; comment?: string }
 ) => {
-  const vote = await new Vote({ author: authorId, type, ...id }).save();
+  const objectId = {
+    post: id.post ? getObjectId(id.post) : undefined,
+    comment: id.comment ? getObjectId(id.comment) : undefined,
+  };
+
+  const vote = await new Vote({ author: getObjectId(authorId), type, ...objectId }).save();
   return vote;
 };

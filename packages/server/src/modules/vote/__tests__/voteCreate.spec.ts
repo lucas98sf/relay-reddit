@@ -235,7 +235,7 @@ describe('Vote create', () => {
     expect(commentResult.comment).toBeNull();
   });
 
-  it('should return "Already voted" when post/comment is already upvoted', async () => {
+  it('should return error when post/comment is already upvoted', async () => {
     const user = await createUser();
     const community = await createCommunity(user.id);
     const post = await createPost(user.id, community.id);
@@ -252,8 +252,8 @@ describe('Vote create', () => {
       { user }
     );
 
-    expect(postResult.success).toBe('Already voted');
-    expect(postResult.error).toBeNull();
+    expect(postResult.success).toBeNull();
+    expect(postResult.error).toBe('you already voted');
 
     await createVote(user.id, 'UPVOTE', { comment: comment.id });
     const commentResult = await mutation(
@@ -266,11 +266,11 @@ describe('Vote create', () => {
       { user }
     );
 
-    expect(postResult.success).toBe('Already voted');
-    expect(commentResult.error).toBeNull();
+    expect(commentResult.success).toBeNull();
+    expect(commentResult.error).toBe('you already voted');
   });
 
-  it('should return "Already voted" when post/comment is already downvoted', async () => {
+  it('should return error when post/comment is already downvoted', async () => {
     const user = await createUser();
     const community = await createCommunity(user.id);
     const post = await createPost(user.id, community.id);
@@ -287,8 +287,8 @@ describe('Vote create', () => {
       { user }
     );
 
-    expect(postResult.success).toBe('Already voted');
-    expect(postResult.error).toBeNull();
+    expect(postResult.success).toBeNull();
+    expect(postResult.error).toBe('you already voted');
 
     await createVote(user.id, 'DOWNVOTE', { comment: comment.id });
     const commentResult = await mutation(
@@ -301,8 +301,8 @@ describe('Vote create', () => {
       { user }
     );
 
-    expect(postResult.success).toBe('Already voted');
-    expect(commentResult.error).toBeNull();
+    expect(commentResult.success).toBeNull();
+    expect(commentResult.error).toBe('you already voted');
   });
 
   it('should update a upvote to downvote on a post/comment successfully', async () => {

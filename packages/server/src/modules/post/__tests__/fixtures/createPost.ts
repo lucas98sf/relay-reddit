@@ -1,3 +1,5 @@
+import { getObjectId } from '@entria/graphql-mongo-helpers';
+
 import Post, { IPost } from '../../PostModel';
 
 export const postCreateInput: Pick<IPost, 'content' | 'image' | 'title' | 'url'> = {
@@ -13,6 +15,11 @@ export const createPost = async (
   communityId: string,
   input = postCreateInput
 ) => {
-  const post = await new Post({ author: authorId, community: communityId, ...input }).save();
+  const post = await new Post({
+    author: getObjectId(authorId),
+    community: getObjectId(communityId),
+    ...input,
+  }).save();
+
   return post;
 };

@@ -96,7 +96,7 @@ export const VoteCreate = mutationWithClientMutationId({
       return {
         id: hasVoted._id,
         ...voteTarget,
-        success: 'Already voted',
+        error: 'you already voted',
       };
     }
 

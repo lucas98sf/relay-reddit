@@ -14,7 +14,7 @@ export type MutationOutput = {
 };
 
 export const createMutation =
-  <M extends string>(mutationName: M) =>
+  (mutationName: string) =>
   async (variables: Record<string, string>, outputFields: string, ctx?: ContextVars) => {
     const source = `mutation ${mutationName}($input: ${mutationName}Input!) {
       ${mutationName}(input: $input) {
