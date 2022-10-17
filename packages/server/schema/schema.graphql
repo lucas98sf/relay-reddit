@@ -302,6 +302,7 @@ type Mutation {
   PostCreate(input: PostCreateInput!): PostCreatePayload
   CommentCreate(input: CommentCreateInput!): CommentCreatePayload
   CommunityCreate(input: CommunityCreateInput!): CommunityCreatePayload
+  CommunityJoin(input: CommunityJoinInput!): CommunityJoinPayload
   VoteCreate(input: VoteCreateInput!): VoteCreatePayload
   VoteDelete(input: VoteDeleteInput!): VoteDeletePayload
 }
@@ -437,6 +438,22 @@ scalar CommunityTitleType
 
 """Minimum 1 characters, Maximum 300 characters"""
 scalar CommunityAboutType
+
+type CommunityJoinPayload {
+  communityEdge: CommunityEdge
+
+  """Default error field resolver."""
+  error: String
+
+  """Default success field resolver."""
+  success: String
+  clientMutationId: String
+}
+
+input CommunityJoinInput {
+  communityId: ID!
+  clientMutationId: String
+}
 
 type VoteCreatePayload {
   comment: Comment

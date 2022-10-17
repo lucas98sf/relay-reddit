@@ -1,3 +1,6 @@
+import { getObjectId } from '@entria/graphql-mongo-helpers';
+
+import User from '../../../user/UserModel';
 import Community, { ICommunity } from '../../CommunityModel';
 
 export const communityCreateInput: Pick<ICommunity, 'name' | 'title' | 'about'> = {
@@ -7,6 +10,14 @@ export const communityCreateInput: Pick<ICommunity, 'name' | 'title' | 'about'> 
 };
 
 export const createCommunity = async (ownerId: string, input = communityCreateInput) => {
-  const community = await new Community({ ...input, owner: ownerId }).save();
+  const ownerObjectId = getObjectId(ownerId);
+
+  const community = new Community({ ...input, owner: ownerObjectId, members: [ownerObjectId] });
+
+  await Promise.all([
+    community.save(),
+    User.findByIdAndUpdate(ownerObjectId, { $push: { communities: community._id } }),
+  ]);
+
   return community;
 };

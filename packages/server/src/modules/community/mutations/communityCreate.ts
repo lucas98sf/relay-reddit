@@ -4,6 +4,7 @@ import { mutationWithClientMutationId, toGlobalId } from 'graphql-relay';
 import { GraphQLStringWithLength, GraphQLUsername } from '@/graphql/customScalars';
 import { GraphQLContext } from '@/graphql/types';
 
+import User from '../../user/UserModel';
 import * as CommunityLoader from '../CommunityLoader';
 import Community from '../CommunityModel';
 import { CommunityConnection } from '../CommunityType';
@@ -33,12 +34,18 @@ export const CommunityCreate = mutationWithClientMutationId({
       (await Community.countDocuments({ name: new RegExp(name.trim(), 'i') })) > 0;
     if (hasCommunityName) return { error: 'community name already in use' };
 
-    const community = await new Community({
+    const community = new Community({
       name,
       title,
       about,
       owner: context.user._id,
-    }).save();
+      members: [context.user._id],
+    });
+
+    await Promise.all([
+      community.save(),
+      User.findByIdAndUpdate(context.user._id, { $push: { communities: community._id } }),
+    ]);
 
     return {
       id: community._id,
