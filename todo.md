@@ -3,16 +3,22 @@
 - [ ] auth provider
 - [x] ui
 - [ ] context
+- [ ] login screen
 - [ ] create post screen
+- [ ] read post screen
+- [ ] create community screen
 - [ ] communities card
 - [ ] ...
 
 ### server
 
 - [x] tests
-- [ ] community joining and leaving mutations
-- [ ] posts, comments and votes update/delete mutations
+- [x] community joining mutations
+- [ ] community leaving mutations
+- [ ] "service" layer?
+- [ ] better error/success messages handling
 - [ ] auth middleware
+- [ ] posts, comments and votes update/delete mutations
 - [ ] subscriptions
 - [ ] ...
 
