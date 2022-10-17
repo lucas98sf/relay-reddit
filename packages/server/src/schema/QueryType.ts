@@ -1,4 +1,4 @@
-import { connectionArgs } from '@entria/graphql-mongo-helpers';
+import { connectionArgs, withFilter } from '@entria/graphql-mongo-helpers';
 import { GraphQLObjectType, GraphQLNonNull, GraphQLString } from 'graphql';
 
 import pkg from '@/../package.json';

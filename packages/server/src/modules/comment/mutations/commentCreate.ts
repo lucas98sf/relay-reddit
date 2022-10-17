@@ -5,11 +5,11 @@ import { mutationWithClientMutationId, toGlobalId } from 'graphql-relay';
 import { GraphQLStringWithLength } from '@/graphql/customScalars';
 import { GraphQLContext } from '@/graphql/types';
 import * as PostLoader from '@/modules/post/PostLoader';
-import PostModel from '@/modules/post/PostModel';
+import Post from '@/modules/post/PostModel';
 import PostType from '@/modules/post/PostType';
 
 import * as CommentLoader from '../CommentLoader';
-import CommentModel from '../CommentModel';
+import Comment from '../CommentModel';
 import { CommentConnection } from '../CommentType';
 
 export const CommentCreate = mutationWithClientMutationId({
@@ -30,7 +30,7 @@ export const CommentCreate = mutationWithClientMutationId({
       };
     }
 
-    const post = await PostModel.findOne({
+    const post = await Post.findOne({
       _id: getObjectId(postId),
     });
 
@@ -40,7 +40,7 @@ export const CommentCreate = mutationWithClientMutationId({
       };
     }
 
-    const comment = await new CommentModel({
+    const comment = await new Comment({
       content,
       post: post._id,
       author: context.user._id,

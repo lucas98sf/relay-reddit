@@ -2,7 +2,7 @@ const pack = require('./package.json');
 
 module.exports = {
   displayName: pack.name,
-  testPathIgnorePatterns: ['/node_modules/', './dist'],
+  modulePathIgnorePatterns: ['/node_modules/', '/dist/', '/fixtures/'],
   coverageReporters: ['lcov', 'html'],
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(ts|tsx)?$',
   moduleFileExtensions: ['ts', 'tsx', 'json', 'js'],

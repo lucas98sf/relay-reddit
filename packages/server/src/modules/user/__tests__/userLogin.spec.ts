@@ -2,10 +2,11 @@ import {
   clearInMemoryMongoDB,
   closeInMemoryMongoDB,
   createInMemoryMongoDB,
-} from '../../../test/inMemoryDb';
-import User from '../UserModel';
+  createMutation,
+  gql,
+} from '../../../test';
 
-import { createUser, userInput } from './fixtures/createUser';
+import { createUser, userLoginInput } from './fixtures/createUser';
 
 beforeAll(createInMemoryMongoDB);
 beforeEach(createUser);
@@ -13,9 +14,52 @@ afterEach(clearInMemoryMongoDB);
 afterAll(closeInMemoryMongoDB);
 
 describe('User login', () => {
-  it('should login successfully', async () => {});
+  const mutation = createMutation('UserLogin');
 
-  it('should throw on invalid username', async () => {});
+  it('should login successfully', async () => {
+    const result = await mutation(
+      userLoginInput,
+      gql`
+        me { 
+          id 
+          username
+          email
+        }
+      `
+    );
 
-  it('should throw on invalid password', async () => {});
+    expect(result.success).toBe('Logged with success');
+    expect(result.error).toBeNull();
+    expect(result.me).toBeDefined();
+  });
+
+  it('should return error on invalid username', async () => {
+    const result = await mutation(
+      { ...userLoginInput, password: 'wrong#password' },
+      gql`
+        me { 
+          id 
+        }
+      `
+    );
+
+    expect(result.success).toBeNull();
+    expect(result.error).toBe('invalid credentials');
+    expect(result.me).toBeNull();
+  });
+
+  it('should return error on invalid password', async () => {
+    const result = await mutation(
+      { ...userLoginInput, username: 'wrong_username' },
+      gql`
+        me { 
+          id 
+        }
+      `
+    );
+
+    expect(result.success).toBeNull();
+    expect(result.error).toBe('invalid credentials');
+    expect(result.me).toBeNull();
+  });
 });

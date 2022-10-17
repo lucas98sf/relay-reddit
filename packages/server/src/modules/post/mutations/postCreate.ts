@@ -5,10 +5,10 @@ import { URLResolver as GraphQLURL } from 'graphql-scalars';
 
 import { GraphQLStringWithLength } from '@/graphql/customScalars';
 import { GraphQLContext } from '@/graphql/types';
-import CommunityModel from '@/modules/community/CommunityModel';
+import Community from '@/modules/community/CommunityModel';
 
 import * as PostLoader from '../PostLoader';
-import PostModel from '../PostModel';
+import Post from '../PostModel';
 import { PostConnection } from '../PostType';
 
 export const PostCreate = mutationWithClientMutationId({
@@ -41,7 +41,7 @@ export const PostCreate = mutationWithClientMutationId({
       };
     }
 
-    const community = await CommunityModel.findOne({
+    const community = await Community.findOne({
       _id: getObjectId(communityId),
     });
 
@@ -51,7 +51,7 @@ export const PostCreate = mutationWithClientMutationId({
       };
     }
 
-    const post = await new PostModel({
+    const post = await new Post({
       title,
       content,
       image,

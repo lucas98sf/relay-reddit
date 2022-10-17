@@ -89,11 +89,13 @@ export const VoteCreate = mutationWithClientMutationId({
         });
         return {
           id: hasVoted._id,
+          ...voteTarget,
           success: `Vote updated to ${type}`,
         };
       }
       return {
         id: hasVoted._id,
+        ...voteTarget,
         success: 'Already voted',
       };
     }
@@ -107,17 +109,18 @@ export const VoteCreate = mutationWithClientMutationId({
     return {
       id: vote._id,
       error: null,
+      ...voteTarget,
       success: `${type} created`,
     };
   },
   outputFields: {
     comment: {
       type: CommentType,
-      resolve: async ({ id }, _, context) => CommentLoader.load(context, id),
+      resolve: async ({ comment }, _, context) => CommentLoader.load(context, comment),
     },
     post: {
       type: PostType,
-      resolve: async ({ id }, _, context) => PostLoader.load(context, id),
+      resolve: async ({ post }, _, context) => PostLoader.load(context, post),
     },
     ...errorField,
     ...successField,

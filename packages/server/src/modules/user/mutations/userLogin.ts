@@ -23,7 +23,7 @@ export const UserLogin = mutationWithClientMutationId({
     const caseInsensitiveUsername = new RegExp(username.trim(), 'i');
     const user = await User.findOne({ username: caseInsensitiveUsername });
 
-    const defaultErrorMessage = 'Invalid credentials';
+    const defaultErrorMessage = 'invalid credentials';
 
     if (!user) return { error: defaultErrorMessage };
 

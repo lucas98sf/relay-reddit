@@ -5,7 +5,7 @@ import { GraphQLStringWithLength, GraphQLUsername } from '@/graphql/customScalar
 import { GraphQLContext } from '@/graphql/types';
 
 import * as CommunityLoader from '../CommunityLoader';
-import CommunityModel from '../CommunityModel';
+import Community from '../CommunityModel';
 import { CommunityConnection } from '../CommunityType';
 
 export const CommunityCreate = mutationWithClientMutationId({
@@ -29,7 +29,11 @@ export const CommunityCreate = mutationWithClientMutationId({
       };
     }
 
-    const community = await new CommunityModel({
+    const hasCommunityName =
+      (await Community.countDocuments({ name: new RegExp(name.trim(), 'i') })) > 0;
+    if (hasCommunityName) return { error: 'community name already in use' };
+
+    const community = await new Community({
       name,
       title,
       about,

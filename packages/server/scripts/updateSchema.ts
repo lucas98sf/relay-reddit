@@ -4,7 +4,7 @@ import { promisify } from 'util';
 
 import { printSchema } from 'graphql/utilities';
 
-import { schema } from '@/schema';
+import { schema } from '../src/schema';
 
 const writeFileAsync = promisify(fs.writeFile);
 
@@ -16,10 +16,6 @@ const cwd = process.cwd();
       schema,
       path: path.join(cwd, `./schema/schema.graphql`),
     },
-    // {
-    //   schema,
-    //   path: path.join(cwd, `../web/schema/schema.graphql`),
-    // },
   ];
 
   await Promise.all([

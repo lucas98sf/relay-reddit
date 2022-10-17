@@ -9,9 +9,10 @@
 
 ### server
 
-- [ ] tests
+- [x] tests
 - [ ] community joining and leaving mutations
 - [ ] posts, comments and votes update/delete mutations
+- [ ] auth middleware
 - [ ] subscriptions
 - [ ] ...
 

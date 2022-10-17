@@ -44,7 +44,7 @@ export const createMutation =
       const output = result.data?.[mutationName] as MutationOutput;
 
       // eslint-disable-next-line no-console
-      console.log(`Mutation ${mutationName} output data:`, output);
+      console.log(`Mutation ${mutationName} output data:`, JSON.stringify(output, null, 2));
 
       return output;
     });
