@@ -3,12 +3,15 @@ import { Link } from 'react-router-dom';
 
 import { timeAgo } from '@/util/timeAgoCalculator';
 
-type PostTextProps = {
+type PostItemTextProps = {
   post: any;
   link: string;
 };
 
-export function PostText({ post: { title, community, author, createdAt }, link }: PostTextProps) {
+export function PostItemText({
+  post: { title, community, author, createdAt },
+  link,
+}: PostItemTextProps) {
   return (
     <Box>
       <Text as={Link} textStyle="h3" to={link}>

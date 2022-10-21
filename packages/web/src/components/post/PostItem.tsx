@@ -1,8 +1,9 @@
 import { Flex, Image } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
-import { PostText } from './PostText';
-import { PostVotes } from './PostVotes';
+import { PostVoteButtons } from '../vote/PostVote';
+
+import { PostItemText } from './PostItemText';
 
 type PostItemProps = {
   post: any;
@@ -30,7 +31,7 @@ export function PostItem({ post, isLast, isFirst }: PostItemProps) {
       flexDirection="row"
       textAlign="left"
     >
-      <PostVotes votes={post.votesCount} />
+      <PostVoteButtons votes={post.votesCount} postId={post.id} />
       <Image
         src={post.image}
         minWidth="100px"
@@ -41,7 +42,7 @@ export function PostItem({ post, isLast, isFirst }: PostItemProps) {
         ml={3}
         borderRadius="4px"
       />
-      <PostText link={link} post={post} />
+      <PostItemText link={link} post={post} />
     </Flex>
   );
 }

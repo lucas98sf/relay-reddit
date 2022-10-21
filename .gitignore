@@ -25,6 +25,3 @@ dist-ssr
 !.env.example
 .eslintcache
 coverage
-
-# Relay
-__generated__/
