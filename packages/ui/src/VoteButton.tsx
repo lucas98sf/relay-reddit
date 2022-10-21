@@ -2,7 +2,7 @@ import { ArrowUpIcon } from '@chakra-ui/icons';
 import { Button, IconButton } from '@chakra-ui/react';
 import { ComponentProps } from 'react';
 
-export function UpvoteButton({
+export function VoteButton({
   direction,
   ...props
 }: ComponentProps<typeof IconButton> & { direction: 'up' | 'down' }) {
