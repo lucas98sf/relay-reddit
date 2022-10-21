@@ -10,7 +10,7 @@ export type IComment = {
   updatedAt: Date;
 } & { _id: Types.ObjectId };
 
-const CommentSchema = new mongoose.Schema(
+const CommentSchema = new mongoose.Schema<IComment>(
   {
     content: {
       type: String,

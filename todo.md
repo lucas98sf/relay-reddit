@@ -3,6 +3,7 @@
 - [ ] auth provider
 - [x] ui
 - [ ] context
+- [ ] error boundary
 - [ ] login screen
 - [ ] create post screen
 - [ ] read post screen
@@ -25,3 +26,4 @@
 ### etc
 
 - [ ] readme
+- [ ] shared types?
