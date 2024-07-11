@@ -1,19 +1,19 @@
-import { errorField, getObjectId, successField } from '@entria/graphql-mongo-helpers';
-import { GraphQLID, GraphQLEnumType } from 'graphql';
-import { mutationWithClientMutationId } from 'graphql-relay';
+import { errorField, getObjectId, successField } from "@entria/graphql-mongo-helpers";
+import { GraphQLID, GraphQLEnumType } from "graphql";
+import { mutationWithClientMutationId } from "graphql-relay";
 
-import { GraphQLContext } from '@/graphql/types';
-import * as CommentLoader from '@/modules/comment/CommentLoader';
-import CommentModel from '@/modules/comment/CommentModel';
-import CommentType from '@/modules/comment/CommentType';
-import * as PostLoader from '@/modules/post/PostLoader';
-import PostModel from '@/modules/post/PostModel';
-import PostType from '@/modules/post/PostType';
+import { GraphQLContext } from "@/graphql/types";
+import * as CommentLoader from "@/modules/comment/CommentLoader";
+import CommentModel from "@/modules/comment/CommentModel";
+import CommentType from "@/modules/comment/CommentType";
+import * as PostLoader from "@/modules/post/PostLoader";
+import PostModel from "@/modules/post/PostModel";
+import PostType from "@/modules/post/PostType";
 
-import VoteModel from '../VoteModel';
+import VoteModel from "../VoteModel";
 
 export const VoteCreate = mutationWithClientMutationId({
-  name: 'VoteCreate',
+  name: "VoteCreate",
   inputFields: {
     postId: {
       type: GraphQLID,
@@ -23,10 +23,10 @@ export const VoteCreate = mutationWithClientMutationId({
     },
     type: {
       type: new GraphQLEnumType({
-        name: 'VoteType',
+        name: "VoteType",
         values: {
-          UPVOTE: { value: 'UPVOTE' },
-          DOWNVOTE: { value: 'DOWNVOTE' },
+          UPVOTE: { value: "UPVOTE" },
+          DOWNVOTE: { value: "DOWNVOTE" },
         },
       }),
     },
@@ -35,19 +35,19 @@ export const VoteCreate = mutationWithClientMutationId({
     // TODO: move this to a middleware
     if (!context.user) {
       return {
-        error: 'user not logged',
+        error: "user not logged",
       };
     }
 
     if (!postId && !commentId) {
       return {
-        error: 'either postId or commentId are required',
+        error: "either postId or commentId are required",
       };
     }
 
     if (postId && commentId) {
       return {
-        error: 'only one of postId or commentId are required',
+        error: "only one of postId or commentId are required",
       };
     }
 
@@ -60,7 +60,7 @@ export const VoteCreate = mutationWithClientMutationId({
 
       if (!post) {
         return {
-          error: 'post not found',
+          error: "post not found",
         };
       }
       voteTarget = { post: post._id };
@@ -71,7 +71,7 @@ export const VoteCreate = mutationWithClientMutationId({
 
       if (!comment) {
         return {
-          error: 'comment not found',
+          error: "comment not found",
         };
       }
       voteTarget = { comment: comment._id };
@@ -96,7 +96,7 @@ export const VoteCreate = mutationWithClientMutationId({
       return {
         id: hasVoted._id,
         ...voteTarget,
-        error: 'you already voted',
+        error: "you already voted",
       };
     }
 

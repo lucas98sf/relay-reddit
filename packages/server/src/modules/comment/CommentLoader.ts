@@ -1,9 +1,9 @@
-import { createLoader } from '@entria/graphql-mongo-helpers';
-import { Document } from 'mongoose';
+import { createLoader } from "@entria/graphql-mongo-helpers";
+import { Document } from "mongoose";
 
-import { registerLoader } from '@/graphql/loaderRegister';
+import { registerLoader } from "@/graphql/loaderRegister";
 
-import CommentModel from './CommentModel';
+import CommentModel from "./CommentModel";
 
 const {
   Wrapper: Comment,
@@ -13,10 +13,10 @@ const {
   loadAll,
 } = createLoader({
   model: CommentModel as typeof CommentModel & Document,
-  loaderName: 'CommentLoader',
+  loaderName: "CommentLoader",
 });
 
 export { getLoader, clearCache, load, loadAll };
 export default Comment;
 
-registerLoader('CommentLoader', getLoader);
+registerLoader("CommentLoader", getLoader);

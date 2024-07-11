@@ -1,9 +1,9 @@
-import { Flex, Image } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+import { Flex, Image } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
-import { PostVoteButtons } from '../vote/PostVote';
+import { PostVoteButtons } from "../vote/PostVote";
 
-import { PostItemText } from './PostItemText';
+import { PostItemText } from "./PostItemText";
 
 type PostItemProps = {
   post: any;
@@ -18,15 +18,15 @@ export function PostItem({ post, isLast, isFirst }: PostItemProps) {
     <Flex
       as={Link}
       to={link}
-      h={['12vh', '10vh']}
+      h={["12vh", "10vh"]}
       pt={2}
       pb={2}
       _hover={{
-        boxSizing: 'border-box',
-        outline: '1px solid',
-        outlineColor: 'brand.400',
-        borderTopRadius: isFirst ? '4px' : 0,
-        borderBottomRadius: isLast ? '4px' : 0,
+        boxSizing: "border-box",
+        outline: "1px solid",
+        outlineColor: "brand.400",
+        borderTopRadius: isFirst ? "4px" : 0,
+        borderBottomRadius: isLast ? "4px" : 0,
       }}
       flexDirection="row"
       textAlign="left"

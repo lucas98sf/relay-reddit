@@ -23,7 +23,7 @@ export const timeAgo = (date: Date) => {
     return `${interval} minutes`;
   }
   if (seconds >= 60) {
-    return '1 minute';
+    return "1 minute";
   }
   return `${Math.floor(seconds)} seconds`;
 };

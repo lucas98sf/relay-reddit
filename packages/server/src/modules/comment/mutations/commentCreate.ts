@@ -1,32 +1,32 @@
-import { errorField, getObjectId, successField } from '@entria/graphql-mongo-helpers';
-import { GraphQLNonNull, GraphQLID } from 'graphql';
-import { mutationWithClientMutationId, toGlobalId } from 'graphql-relay';
+import { errorField, getObjectId, successField } from "@entria/graphql-mongo-helpers";
+import { GraphQLNonNull, GraphQLID } from "graphql";
+import { mutationWithClientMutationId, toGlobalId } from "graphql-relay";
 
-import { GraphQLStringWithLength } from '@/graphql/customScalars';
-import { GraphQLContext } from '@/graphql/types';
-import * as PostLoader from '@/modules/post/PostLoader';
-import Post from '@/modules/post/PostModel';
-import PostType from '@/modules/post/PostType';
+import { GraphQLStringWithLength } from "@/graphql/customScalars";
+import { GraphQLContext } from "@/graphql/types";
+import * as PostLoader from "@/modules/post/PostLoader";
+import Post from "@/modules/post/PostModel";
+import PostType from "@/modules/post/PostType";
 
-import * as CommentLoader from '../CommentLoader';
-import Comment from '../CommentModel';
-import { CommentConnection } from '../CommentType';
+import * as CommentLoader from "../CommentLoader";
+import Comment from "../CommentModel";
+import { CommentConnection } from "../CommentType";
 
 export const CommentCreate = mutationWithClientMutationId({
-  name: 'CommentCreate',
+  name: "CommentCreate",
   inputFields: {
     postId: {
       type: new GraphQLNonNull(GraphQLID),
     },
     content: {
-      type: GraphQLStringWithLength('CommentContent', 1, 9999),
+      type: GraphQLStringWithLength("CommentContent", 1, 9999),
     },
   },
   mutateAndGetPayload: async ({ postId, content }, context: GraphQLContext) => {
     // TODO: move this to a middleware
     if (!context.user) {
       return {
-        error: 'user not logged',
+        error: "user not logged",
       };
     }
 
@@ -36,7 +36,7 @@ export const CommentCreate = mutationWithClientMutationId({
 
     if (!post) {
       return {
-        error: 'post not found',
+        error: "post not found",
       };
     }
 
@@ -48,7 +48,7 @@ export const CommentCreate = mutationWithClientMutationId({
 
     return {
       id: comment._id,
-      success: 'Comment created',
+      success: "Comment created",
     };
   },
   outputFields: {
@@ -62,7 +62,7 @@ export const CommentCreate = mutationWithClientMutationId({
         }
 
         return {
-          cursor: toGlobalId('Comment', comment._id),
+          cursor: toGlobalId("Comment", comment._id),
           node: comment,
         };
       },

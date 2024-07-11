@@ -1,2 +1,2 @@
-export * from './voteCreate';
-export * from './voteDelete';
+export * from "./voteCreate";
+export * from "./voteDelete";

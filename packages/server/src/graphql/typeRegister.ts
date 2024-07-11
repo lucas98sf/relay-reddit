@@ -1,7 +1,7 @@
-import { GraphQLObjectType } from 'graphql';
-import { fromGlobalId, nodeDefinitions } from 'graphql-relay';
+import { GraphQLObjectType } from "graphql";
+import { fromGlobalId, nodeDefinitions } from "graphql-relay";
 
-import { GraphQLContext } from './types';
+import { GraphQLContext } from "./types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Load = (context: GraphQLContext, id: string) => any;
@@ -34,7 +34,7 @@ const getTypeRegister = () => {
 
       return (load && load(context, id)) || null;
     },
-    obj => {
+    (obj) => {
       const { type } = typesLoaders[obj.constructor.name] || { type: null };
 
       return type.name;

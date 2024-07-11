@@ -16,7 +16,7 @@
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@fontsource/ibm-plex-sans": "^4.5.13",
-    "@relay-reddit/ui": "*",
+    "@relay-reddit/ui": "workspace:../ui",
     "framer-motion": "^6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -1,23 +1,17 @@
-import {
-  clearInMemoryMongoDB,
-  closeInMemoryMongoDB,
-  createInMemoryMongoDB,
-  createMutation,
-  gql,
-} from '../../../test';
-import { createCommunity } from '../../community/__tests__/fixtures/createCommunity';
-import { createUser } from '../../user/__tests__/fixtures/createUser';
+import { clearInMemoryMongoDB, closeInMemoryMongoDB, createInMemoryMongoDB, createMutation, gql } from "../../../test";
+import { createCommunity } from "../../community/__tests__/fixtures/createCommunity";
+import { createUser } from "../../user/__tests__/fixtures/createUser";
 
-import { postCreateInput } from './fixtures/createPost';
+import { postCreateInput } from "./fixtures/createPost";
 
 beforeAll(createInMemoryMongoDB);
 afterEach(clearInMemoryMongoDB);
 afterAll(closeInMemoryMongoDB);
 
-describe('Post create', () => {
-  const mutation = createMutation('PostCreate');
+describe("Post create", () => {
+  const mutation = createMutation("PostCreate");
 
-  it('should create a post successfully', async () => {
+  it("should create a post successfully", async () => {
     const user = await createUser();
     const community = await createCommunity(user.id);
 
@@ -43,7 +37,7 @@ describe('Post create', () => {
       { user }
     );
 
-    expect(result.success).toBe('Post created');
+    expect(result.success).toBe("Post created");
     expect(result.error).toBeNull();
     expect(result.postEdge.node.id).toBeDefined();
     expect(result.postEdge.node.title).toBe(postCreateInput.title);
@@ -54,7 +48,7 @@ describe('Post create', () => {
     expect(result.postEdge.node.community._id).toBe(community._id.toString());
   });
 
-  it('should return error user is not logged in', async () => {
+  it("should return error user is not logged in", async () => {
     const user = await createUser();
     const community = await createCommunity(user.id);
 
@@ -70,16 +64,16 @@ describe('Post create', () => {
     );
 
     expect(result.success).toBeNull();
-    expect(result.error).toBe('user not logged');
+    expect(result.error).toBe("user not logged");
     expect(result.postEdge).toBeNull();
   });
 
-  it('should return error when community is not found', async () => {
+  it("should return error when community is not found", async () => {
     const user = await createUser();
     await createCommunity(user.id);
 
     const result = await mutation(
-      { ...postCreateInput, communityId: 'random_id' },
+      { ...postCreateInput, communityId: "random_id" },
       gql`
         postEdge {
           node {
@@ -91,7 +85,7 @@ describe('Post create', () => {
     );
 
     expect(result.success).toBeNull();
-    expect(result.error).toBe('community not found');
+    expect(result.error).toBe("community not found");
     expect(result.postEdge).toBeNull();
   });
 });

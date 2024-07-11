@@ -1,38 +1,37 @@
-import { errorField, successField } from '@entria/graphql-mongo-helpers';
-import { mutationWithClientMutationId, toGlobalId } from 'graphql-relay';
+import { errorField, successField } from "@entria/graphql-mongo-helpers";
+import { mutationWithClientMutationId, toGlobalId } from "graphql-relay";
 
-import { GraphQLStringWithLength, GraphQLUsername } from '@/graphql/customScalars';
-import { GraphQLContext } from '@/graphql/types';
+import { GraphQLStringWithLength, GraphQLUsername } from "@/graphql/customScalars";
+import { GraphQLContext } from "@/graphql/types";
 
-import User from '../../user/UserModel';
-import * as CommunityLoader from '../CommunityLoader';
-import Community from '../CommunityModel';
-import { CommunityConnection } from '../CommunityType';
+import User from "../../user/UserModel";
+import * as CommunityLoader from "../CommunityLoader";
+import Community from "../CommunityModel";
+import { CommunityConnection } from "../CommunityType";
 
 export const CommunityCreate = mutationWithClientMutationId({
-  name: 'CommunityCreate',
+  name: "CommunityCreate",
   inputFields: {
     name: {
       type: GraphQLUsername,
     },
     title: {
-      type: GraphQLStringWithLength('CommunityTitle', 1, 50),
+      type: GraphQLStringWithLength("CommunityTitle", 1, 50),
     },
     about: {
-      type: GraphQLStringWithLength('CommunityAbout', 1, 300),
+      type: GraphQLStringWithLength("CommunityAbout", 1, 300),
     },
   },
   mutateAndGetPayload: async ({ name, title, about }, context: GraphQLContext) => {
     // TODO: move this to a middleware
     if (!context.user) {
       return {
-        error: 'user not logged',
+        error: "user not logged",
       };
     }
 
-    const hasCommunityName =
-      (await Community.countDocuments({ name: new RegExp(name.trim(), 'i') })) > 0;
-    if (hasCommunityName) return { error: 'community name already in use' };
+    const hasCommunityName = (await Community.countDocuments({ name: new RegExp(name.trim(), "i") })) > 0;
+    if (hasCommunityName) return { error: "community name already in use" };
 
     const community = new Community({
       name,
@@ -49,7 +48,7 @@ export const CommunityCreate = mutationWithClientMutationId({
 
     return {
       id: community._id,
-      success: 'Community created',
+      success: "Community created",
     };
   },
   outputFields: {
@@ -63,7 +62,7 @@ export const CommunityCreate = mutationWithClientMutationId({
         }
 
         return {
-          cursor: toGlobalId('Community', community._id),
+          cursor: toGlobalId("Community", community._id),
           node: community,
         };
       },

@@ -1,22 +1,17 @@
-import { graphql } from 'graphql';
+import { graphql } from "graphql";
 
-import { getContext } from '../../../getContext';
-import { schema } from '../../../schema';
-import {
-  clearInMemoryMongoDB,
-  closeInMemoryMongoDB,
-  createInMemoryMongoDB,
-  gql,
-} from '../../../test';
+import { getContext } from "../../../getContext";
+import { schema } from "../../../schema";
+import { clearInMemoryMongoDB, closeInMemoryMongoDB, createInMemoryMongoDB, gql } from "../../../test";
 
-import { createUser } from './fixtures/createUser';
+import { createUser } from "./fixtures/createUser";
 
 beforeAll(createInMemoryMongoDB);
 afterEach(clearInMemoryMongoDB);
 afterAll(closeInMemoryMongoDB);
 
-describe('Queries', () => {
-  it('should query the logged in user', async () => {
+describe("Queries", () => {
+  it("should query the logged in user", async () => {
     const user = await createUser();
 
     const query = gql`

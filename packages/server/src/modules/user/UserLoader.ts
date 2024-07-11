@@ -1,9 +1,9 @@
-import { createLoader } from '@entria/graphql-mongo-helpers';
-import { Document } from 'mongoose';
+import { createLoader } from "@entria/graphql-mongo-helpers";
+import { Document } from "mongoose";
 
-import { registerLoader } from '@/graphql/loaderRegister';
+import { registerLoader } from "@/graphql/loaderRegister";
 
-import UserModel from './UserModel';
+import UserModel from "./UserModel";
 
 const {
   Wrapper: User,
@@ -13,10 +13,10 @@ const {
   loadAll,
 } = createLoader({
   model: UserModel as typeof UserModel & Document,
-  loaderName: 'UserLoader',
+  loaderName: "UserLoader",
 });
 
 export { getLoader, clearCache, load, loadAll };
 export default User;
 
-registerLoader('UserLoader', getLoader);
+registerLoader("UserLoader", getLoader);

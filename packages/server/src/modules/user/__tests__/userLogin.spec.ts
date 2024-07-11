@@ -1,22 +1,16 @@
-import {
-  clearInMemoryMongoDB,
-  closeInMemoryMongoDB,
-  createInMemoryMongoDB,
-  createMutation,
-  gql,
-} from '../../../test';
+import { clearInMemoryMongoDB, closeInMemoryMongoDB, createInMemoryMongoDB, createMutation, gql } from "../../../test";
 
-import { createUser, userLoginInput } from './fixtures/createUser';
+import { createUser, userLoginInput } from "./fixtures/createUser";
 
 beforeAll(createInMemoryMongoDB);
 beforeEach(createUser);
 afterEach(clearInMemoryMongoDB);
 afterAll(closeInMemoryMongoDB);
 
-describe('User login', () => {
-  const mutation = createMutation('UserLogin');
+describe("User login", () => {
+  const mutation = createMutation("UserLogin");
 
-  it('should login successfully', async () => {
+  it("should login successfully", async () => {
     const result = await mutation(
       userLoginInput,
       gql`
@@ -28,14 +22,14 @@ describe('User login', () => {
       `
     );
 
-    expect(result.success).toBe('Logged with success');
+    expect(result.success).toBe("Logged with success");
     expect(result.error).toBeNull();
     expect(result.me).toBeDefined();
   });
 
-  it('should return error on invalid username', async () => {
+  it("should return error on invalid username", async () => {
     const result = await mutation(
-      { ...userLoginInput, password: 'wrong#password' },
+      { ...userLoginInput, password: "wrong#password" },
       gql`
         me { 
           id 
@@ -44,13 +38,13 @@ describe('User login', () => {
     );
 
     expect(result.success).toBeNull();
-    expect(result.error).toBe('invalid credentials');
+    expect(result.error).toBe("invalid credentials");
     expect(result.me).toBeNull();
   });
 
-  it('should return error on invalid password', async () => {
+  it("should return error on invalid password", async () => {
     const result = await mutation(
-      { ...userLoginInput, username: 'wrong_username' },
+      { ...userLoginInput, username: "wrong_username" },
       gql`
         me { 
           id 
@@ -59,7 +53,7 @@ describe('User login', () => {
     );
 
     expect(result.success).toBeNull();
-    expect(result.error).toBe('invalid credentials');
+    expect(result.error).toBe("invalid credentials");
     expect(result.me).toBeNull();
   });
 });

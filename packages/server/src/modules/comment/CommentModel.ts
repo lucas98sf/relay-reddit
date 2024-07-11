@@ -1,4 +1,4 @@
-import mongoose, { Model, Types } from 'mongoose';
+import mongoose, { Model, Types } from "mongoose";
 
 import ObjectId = mongoose.Schema.Types.ObjectId;
 
@@ -18,27 +18,26 @@ const CommentSchema = new mongoose.Schema<IComment>(
     },
     post: {
       type: ObjectId,
-      ref: 'Post',
+      ref: "Post",
       required: true,
       index: true,
     },
     author: {
       type: ObjectId,
-      ref: 'User',
+      ref: "User",
       required: true,
       index: true,
     },
   },
   {
     timestamps: {
-      createdAt: 'createdAt',
-      updatedAt: 'updatedAt',
+      createdAt: "createdAt",
+      updatedAt: "updatedAt",
     },
-    collection: 'Comment',
+    collection: "Comment",
   }
 );
 
-const CommentModel: Model<IComment> =
-  mongoose.models.Comment || mongoose.model('Comment', CommentSchema);
+const CommentModel: Model<IComment> = mongoose.models.Comment || mongoose.model("Comment", CommentSchema);
 
 export default CommentModel;

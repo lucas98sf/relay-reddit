@@ -1,16 +1,16 @@
-import { errorField, getObjectId, successField } from '@entria/graphql-mongo-helpers';
-import { GraphQLID, GraphQLNonNull } from 'graphql';
-import { mutationWithClientMutationId, toGlobalId } from 'graphql-relay';
+import { errorField, getObjectId, successField } from "@entria/graphql-mongo-helpers";
+import { GraphQLID, GraphQLNonNull } from "graphql";
+import { mutationWithClientMutationId, toGlobalId } from "graphql-relay";
 
-import { GraphQLContext } from '@/graphql/types';
+import { GraphQLContext } from "@/graphql/types";
 
-import User from '../../user/UserModel';
-import * as CommunityLoader from '../CommunityLoader';
-import Community from '../CommunityModel';
-import { CommunityConnection } from '../CommunityType';
+import User from "../../user/UserModel";
+import * as CommunityLoader from "../CommunityLoader";
+import Community from "../CommunityModel";
+import { CommunityConnection } from "../CommunityType";
 
 export const CommunityJoin = mutationWithClientMutationId({
-  name: 'CommunityJoin',
+  name: "CommunityJoin",
   inputFields: {
     communityId: {
       type: new GraphQLNonNull(GraphQLID),
@@ -20,7 +20,7 @@ export const CommunityJoin = mutationWithClientMutationId({
     // TODO: move this to a middleware
     if (!context.user) {
       return {
-        error: 'user not logged',
+        error: "user not logged",
       };
     }
 
@@ -28,13 +28,13 @@ export const CommunityJoin = mutationWithClientMutationId({
 
     if (!community) {
       return {
-        error: 'community not found',
+        error: "community not found",
       };
     }
 
     if (community.members.includes(context.user._id)) {
       return {
-        error: 'already joined this community',
+        error: "already joined this community",
       };
     }
 
@@ -47,7 +47,7 @@ export const CommunityJoin = mutationWithClientMutationId({
 
     return {
       id: community._id,
-      success: 'Community joined',
+      success: "Community joined",
     };
   },
   outputFields: {
@@ -61,7 +61,7 @@ export const CommunityJoin = mutationWithClientMutationId({
         }
 
         return {
-          cursor: toGlobalId('Community', community._id),
+          cursor: toGlobalId("Community", community._id),
           node: community,
         };
       },

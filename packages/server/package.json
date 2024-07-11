@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "prebuild": "yarn update-schema",
-    "predev": "yarn update-schema",
+    "prebuild": "pnpm update-schema",
+    "predev": "pnpm update-schema",
     "dev": "ts-node-dev -r tsconfig-paths/register --transpile-only --ignore-watch node_modules src/server.ts",
     "update-schema": "ts-node -r tsconfig-paths/register --transpile-only scripts/updateSchema.ts"
   },

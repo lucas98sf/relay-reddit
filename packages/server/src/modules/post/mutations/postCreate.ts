@@ -1,24 +1,24 @@
-import { errorField, getObjectId, successField } from '@entria/graphql-mongo-helpers';
-import { GraphQLID, GraphQLNonNull } from 'graphql';
-import { mutationWithClientMutationId, toGlobalId } from 'graphql-relay';
-import { URLResolver as GraphQLURL } from 'graphql-scalars';
+import { errorField, getObjectId, successField } from "@entria/graphql-mongo-helpers";
+import { GraphQLID, GraphQLNonNull } from "graphql";
+import { mutationWithClientMutationId, toGlobalId } from "graphql-relay";
+import { URLResolver as GraphQLURL } from "graphql-scalars";
 
-import { GraphQLStringWithLength } from '@/graphql/customScalars';
-import { GraphQLContext } from '@/graphql/types';
-import Community from '@/modules/community/CommunityModel';
+import { GraphQLStringWithLength } from "@/graphql/customScalars";
+import { GraphQLContext } from "@/graphql/types";
+import Community from "@/modules/community/CommunityModel";
 
-import * as PostLoader from '../PostLoader';
-import Post from '../PostModel';
-import { PostConnection } from '../PostType';
+import * as PostLoader from "../PostLoader";
+import Post from "../PostModel";
+import { PostConnection } from "../PostType";
 
 export const PostCreate = mutationWithClientMutationId({
-  name: 'PostCreate',
+  name: "PostCreate",
   inputFields: {
     title: {
-      type: GraphQLStringWithLength('PostTitle'),
+      type: GraphQLStringWithLength("PostTitle"),
     },
     content: {
-      type: GraphQLStringWithLength('PostContent', 0, 9999),
+      type: GraphQLStringWithLength("PostContent", 0, 9999),
     },
     image: {
       type: GraphQLURL,
@@ -30,14 +30,11 @@ export const PostCreate = mutationWithClientMutationId({
       type: new GraphQLNonNull(GraphQLID),
     },
   },
-  mutateAndGetPayload: async (
-    { communityId, title, content, image, url },
-    context: GraphQLContext
-  ) => {
+  mutateAndGetPayload: async ({ communityId, title, content, image, url }, context: GraphQLContext) => {
     // TODO: move this to a middleware
     if (!context.user) {
       return {
-        error: 'user not logged',
+        error: "user not logged",
       };
     }
 
@@ -47,7 +44,7 @@ export const PostCreate = mutationWithClientMutationId({
 
     if (!community) {
       return {
-        error: 'community not found',
+        error: "community not found",
       };
     }
 
@@ -62,7 +59,7 @@ export const PostCreate = mutationWithClientMutationId({
 
     return {
       id: post._id,
-      success: 'Post created',
+      success: "Post created",
     };
   },
   outputFields: {
@@ -76,7 +73,7 @@ export const PostCreate = mutationWithClientMutationId({
         }
 
         return {
-          cursor: toGlobalId('Post', post._id),
+          cursor: toGlobalId("Post", post._id),
           node: post,
         };
       },

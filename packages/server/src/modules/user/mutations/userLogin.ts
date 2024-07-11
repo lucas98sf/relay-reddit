@@ -1,16 +1,16 @@
-import { errorField, successField } from '@entria/graphql-mongo-helpers';
-import { mutationWithClientMutationId } from 'graphql-relay';
-import { GraphQLNonEmptyString } from 'graphql-scalars';
+import { errorField, successField } from "@entria/graphql-mongo-helpers";
+import { mutationWithClientMutationId } from "graphql-relay";
+import { GraphQLNonEmptyString } from "graphql-scalars";
 
-import { generateToken } from '@/auth';
-import { config } from '@/config';
+import { generateToken } from "@/auth";
+import { config } from "@/config";
 
-import * as UserLoader from '../UserLoader';
-import User from '../UserModel';
-import UserType from '../UserType';
+import * as UserLoader from "../UserLoader";
+import User from "../UserModel";
+import UserType from "../UserType";
 
 export const UserLogin = mutationWithClientMutationId({
-  name: 'UserLogin',
+  name: "UserLogin",
   inputFields: {
     username: {
       type: GraphQLNonEmptyString,
@@ -20,10 +20,10 @@ export const UserLogin = mutationWithClientMutationId({
     },
   },
   mutateAndGetPayload: async ({ username, password }, context) => {
-    const caseInsensitiveUsername = new RegExp(username.trim(), 'i');
+    const caseInsensitiveUsername = new RegExp(username.trim(), "i");
     const user = await User.findOne({ username: caseInsensitiveUsername });
 
-    const defaultErrorMessage = 'invalid credentials';
+    const defaultErrorMessage = "invalid credentials";
 
     if (!user) return { error: defaultErrorMessage };
 
@@ -36,7 +36,7 @@ export const UserLogin = mutationWithClientMutationId({
     return {
       token: generateToken(user),
       id: user._id,
-      success: 'Logged with success',
+      success: "Logged with success",
     };
   },
   outputFields: {

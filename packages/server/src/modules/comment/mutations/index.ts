@@ -1,1 +1,1 @@
-export * from './commentCreate';
+export * from "./commentCreate";

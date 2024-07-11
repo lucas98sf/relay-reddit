@@ -1,9 +1,9 @@
-import { createLoader } from '@entria/graphql-mongo-helpers';
-import { Document } from 'mongoose';
+import { createLoader } from "@entria/graphql-mongo-helpers";
+import { Document } from "mongoose";
 
-import { registerLoader } from '@/graphql/loaderRegister';
+import { registerLoader } from "@/graphql/loaderRegister";
 
-import PostModel from './PostModel';
+import PostModel from "./PostModel";
 
 const {
   Wrapper: Post,
@@ -13,10 +13,10 @@ const {
   loadAll,
 } = createLoader({
   model: PostModel as typeof PostModel & Document,
-  loaderName: 'PostLoader',
+  loaderName: "PostLoader",
 });
 
 export { getLoader, clearCache, load, loadAll };
 export default Post;
 
-registerLoader('PostLoader', getLoader);
+registerLoader("PostLoader", getLoader);

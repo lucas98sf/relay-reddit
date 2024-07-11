@@ -8,8 +8,8 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { ConcreteRequest, Mutation } from 'relay-runtime';
-export type VoteType = 'DOWNVOTE' | 'UPVOTE' | '%future added value';
+import { ConcreteRequest, Mutation } from "relay-runtime";
+export type VoteType = "DOWNVOTE" | "UPVOTE" | "%future added value";
 export type VoteCreateInput = {
   clientMutationId?: string | null;
   commentId?: string | null;
@@ -37,51 +37,51 @@ const node: ConcreteRequest = (function () {
   var v0 = [
       {
         defaultValue: null,
-        kind: 'LocalArgument',
-        name: 'input',
+        kind: "LocalArgument",
+        name: "input",
       },
     ],
     v1 = [
       {
-        kind: 'Variable',
-        name: 'input',
-        variableName: 'input',
+        kind: "Variable",
+        name: "input",
+        variableName: "input",
       },
     ],
     v2 = {
       alias: null,
       args: null,
-      kind: 'ScalarField',
-      name: 'success',
+      kind: "ScalarField",
+      name: "success",
       storageKey: null,
     },
     v3 = {
       alias: null,
       args: null,
-      kind: 'ScalarField',
-      name: 'error',
+      kind: "ScalarField",
+      name: "error",
       storageKey: null,
     },
     v4 = {
       alias: null,
       args: null,
-      kind: 'ScalarField',
-      name: 'votesCount',
+      kind: "ScalarField",
+      name: "votesCount",
       storageKey: null,
     };
   return {
     fragment: {
       argumentDefinitions: v0 /*: any*/,
-      kind: 'Fragment',
+      kind: "Fragment",
       metadata: null,
-      name: 'PostVoteCreateMutation',
+      name: "PostVoteCreateMutation",
       selections: [
         {
           alias: null,
           args: v1 /*: any*/,
-          concreteType: 'VoteCreatePayload',
-          kind: 'LinkedField',
-          name: 'VoteCreate',
+          concreteType: "VoteCreatePayload",
+          kind: "LinkedField",
+          name: "VoteCreate",
           plural: false,
           selections: [
             v2 /*: any*/,
@@ -89,9 +89,9 @@ const node: ConcreteRequest = (function () {
             {
               alias: null,
               args: null,
-              concreteType: 'Post',
-              kind: 'LinkedField',
-              name: 'post',
+              concreteType: "Post",
+              kind: "LinkedField",
+              name: "post",
               plural: false,
               selections: [v4 /*: any*/],
               storageKey: null,
@@ -100,21 +100,21 @@ const node: ConcreteRequest = (function () {
           storageKey: null,
         },
       ],
-      type: 'Mutation',
+      type: "Mutation",
       abstractKey: null,
     },
-    kind: 'Request',
+    kind: "Request",
     operation: {
       argumentDefinitions: v0 /*: any*/,
-      kind: 'Operation',
-      name: 'PostVoteCreateMutation',
+      kind: "Operation",
+      name: "PostVoteCreateMutation",
       selections: [
         {
           alias: null,
           args: v1 /*: any*/,
-          concreteType: 'VoteCreatePayload',
-          kind: 'LinkedField',
-          name: 'VoteCreate',
+          concreteType: "VoteCreatePayload",
+          kind: "LinkedField",
+          name: "VoteCreate",
           plural: false,
           selections: [
             v2 /*: any*/,
@@ -122,17 +122,17 @@ const node: ConcreteRequest = (function () {
             {
               alias: null,
               args: null,
-              concreteType: 'Post',
-              kind: 'LinkedField',
-              name: 'post',
+              concreteType: "Post",
+              kind: "LinkedField",
+              name: "post",
               plural: false,
               selections: [
                 v4 /*: any*/,
                 {
                   alias: null,
                   args: null,
-                  kind: 'ScalarField',
-                  name: 'id',
+                  kind: "ScalarField",
+                  name: "id",
                   storageKey: null,
                 },
               ],
@@ -144,16 +144,16 @@ const node: ConcreteRequest = (function () {
       ],
     },
     params: {
-      cacheID: '0301f6c06791a3b2830b1f1c55b3380f',
+      cacheID: "0301f6c06791a3b2830b1f1c55b3380f",
       id: null,
       metadata: {},
-      name: 'PostVoteCreateMutation',
-      operationKind: 'mutation',
-      text: 'mutation PostVoteCreateMutation(\n  $input: VoteCreateInput!\n) {\n  VoteCreate(input: $input) {\n    success\n    error\n    post {\n      votesCount\n      id\n    }\n  }\n}\n',
+      name: "PostVoteCreateMutation",
+      operationKind: "mutation",
+      text: "mutation PostVoteCreateMutation(\n  $input: VoteCreateInput!\n) {\n  VoteCreate(input: $input) {\n    success\n    error\n    post {\n      votesCount\n      id\n    }\n  }\n}\n",
     },
   };
 })();
 
-(node as any).hash = 'e8d7e9c78669e0a43a8ac6617204d9c3';
+(node as any).hash = "e8d7e9c78669e0a43a8ac6617204d9c3";
 
 export default node;

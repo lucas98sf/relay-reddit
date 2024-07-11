@@ -1,9 +1,9 @@
-import { Loading } from '@relay-reddit/ui';
-import { Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Loading } from "@relay-reddit/ui";
+import { Suspense } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import { Providers } from './Providers';
-import { Home } from './pages';
+import { Providers } from "./Providers";
+import { Home } from "./pages";
 
 function App() {
   return (

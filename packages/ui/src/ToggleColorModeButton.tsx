@@ -1,5 +1,5 @@
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
-import { useColorMode, IconButton } from '@chakra-ui/react';
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { useColorMode, IconButton } from "@chakra-ui/react";
 
 export function PostList() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -8,10 +8,10 @@ export function PostList() {
       rounded="full"
       aria-label="Toggle dark mode"
       bgColor="transparent"
-      icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+      icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
       onClick={toggleColorMode}
       _hover={{
-        bgColor: 'transparent',
+        bgColor: "transparent",
       }}
     />
   );

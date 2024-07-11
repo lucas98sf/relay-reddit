@@ -1,9 +1,9 @@
-import { Request } from 'graphql-helix';
-import { Context } from 'koa';
+import { Request } from "graphql-helix";
+import { Context } from "koa";
 
-import { getDataloaders } from './graphql/loaderRegister';
-import { GraphQLContext } from './graphql/types';
-import { IUser } from './modules/user/UserModel';
+import { getDataloaders } from "./graphql/loaderRegister";
+import { GraphQLContext } from "./graphql/types";
+import { IUser } from "./modules/user/UserModel";
 
 export type ContextVars = {
   user?: IUser | null;

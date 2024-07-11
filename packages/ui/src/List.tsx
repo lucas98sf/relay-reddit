@@ -1,5 +1,5 @@
-import { StackDivider, VStack as _VStack } from '@chakra-ui/react';
-import { ComponentProps } from 'react';
+import { StackDivider, VStack as _VStack } from "@chakra-ui/react";
+import { ComponentProps } from "react";
 
 export function List(props: ComponentProps<typeof _VStack>) {
   return (

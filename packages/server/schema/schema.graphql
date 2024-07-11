@@ -1,13 +1,21 @@
 type Query {
-  """Fetches an object given its ID"""
+  """
+  Fetches an object given its ID
+  """
   node(
-    """The ID of an object"""
+    """
+    The ID of an object
+    """
     id: ID!
   ): Node
 
-  """Fetches objects given their IDs"""
+  """
+  Fetches objects given their IDs
+  """
   nodes(
-    """The IDs of objects"""
+    """
+    The IDs of objects
+    """
     ids: [ID!]!
   ): [Node]!
   me: User
@@ -16,18 +24,28 @@ type Query {
   version: String!
 }
 
-"""An object with an ID"""
+"""
+An object with an ID
+"""
 interface Node {
-  """The id of the object."""
+  """
+  The id of the object.
+  """
   id: ID!
 }
 
-"""User data"""
+"""
+User data
+"""
 type User implements Node {
-  """The ID of an object"""
+  """
+  The ID of an object
+  """
   id: ID!
 
-  """mongoose _id"""
+  """
+  mongoose _id
+  """
   _id: String!
   username: String
   email: String
@@ -39,9 +57,13 @@ type User implements Node {
   updatedAt: String
 }
 
-"""A connection to a list of items."""
+"""
+A connection to a list of items.
+"""
 type PostConnection implements Connection {
-  """Number of items in this connection."""
+  """
+  Number of items in this connection.
+  """
   count: Int
 
   """
@@ -52,22 +74,34 @@ type PostConnection implements Connection {
   """
   totalCount: Int
 
-  """Offset from start."""
+  """
+  Offset from start.
+  """
   startCursorOffset: Int!
 
-  """Offset till end."""
+  """
+  Offset till end.
+  """
   endCursorOffset: Int!
 
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 
-  """A list of edges."""
+  """
+  A list of edges.
+  """
   edges: [PostEdge]!
 }
 
-"""A connection to a list of items."""
+"""
+A connection to a list of items.
+"""
 interface Connection {
-  """Number of items in this connection."""
+  """
+  Number of items in this connection.
+  """
   count: Int
 
   """
@@ -78,46 +112,74 @@ interface Connection {
   """
   totalCount: Int
 
-  """Offset from start."""
+  """
+  Offset from start.
+  """
   startCursorOffset: Int!
 
-  """Offset till end."""
+  """
+  Offset till end.
+  """
   endCursorOffset: Int!
 
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 }
 
-"""Information about pagination in a connection."""
+"""
+Information about pagination in a connection.
+"""
 type PageInfo {
-  """When paginating forwards, are there more items?"""
+  """
+  When paginating forwards, are there more items?
+  """
   hasNextPage: Boolean!
 
-  """When paginating backwards, are there more items?"""
+  """
+  When paginating backwards, are there more items?
+  """
   hasPreviousPage: Boolean!
 
-  """When paginating backwards, the cursor to continue."""
+  """
+  When paginating backwards, the cursor to continue.
+  """
   startCursor: String
 
-  """When paginating forwards, the cursor to continue."""
+  """
+  When paginating forwards, the cursor to continue.
+  """
   endCursor: String
 }
 
-"""An edge in a connection."""
+"""
+An edge in a connection.
+"""
 type PostEdge {
-  """The item at the end of the edge."""
+  """
+  The item at the end of the edge.
+  """
   node: Post
 
-  """A cursor for use in pagination."""
+  """
+  A cursor for use in pagination.
+  """
   cursor: String!
 }
 
-"""Post data"""
+"""
+Post data
+"""
 type Post implements Node {
-  """The ID of an object"""
+  """
+  The ID of an object
+  """
   id: ID!
 
-  """mongoose _id"""
+  """
+  mongoose _id
+  """
   _id: String!
   title: String
   content: String
@@ -126,57 +188,85 @@ type Post implements Node {
   community: Community
   author: User
 
-  """Total votes count (upvotes - downvotes)"""
+  """
+  Total votes count (upvotes - downvotes)
+  """
   votesCount: Int!
   comments(after: String, first: Int, before: String, last: Int): CommentConnection!
   createdAt: String
   updatedAt: String
 }
 
-"""Community data"""
+"""
+Community data
+"""
 type Community implements Node {
-  """The ID of an object"""
+  """
+  The ID of an object
+  """
   id: ID!
 
-  """mongoose _id"""
+  """
+  mongoose _id
+  """
   _id: String!
   name: String
   title: String
   about: String
   owner: User
   members(
-    """Returns the items in the list that come after the specified cursor."""
+    """
+    Returns the items in the list that come after the specified cursor.
+    """
     after: String
 
-    """Returns the first n items from the list."""
+    """
+    Returns the first n items from the list.
+    """
     first: Int
 
-    """Returns the items in the list that come before the specified cursor."""
+    """
+    Returns the items in the list that come before the specified cursor.
+    """
     before: String
 
-    """Returns the last n items from the list."""
+    """
+    Returns the last n items from the list.
+    """
     last: Int
   ): UserConnection!
   posts(
-    """Returns the items in the list that come after the specified cursor."""
+    """
+    Returns the items in the list that come after the specified cursor.
+    """
     after: String
 
-    """Returns the first n items from the list."""
+    """
+    Returns the first n items from the list.
+    """
     first: Int
 
-    """Returns the items in the list that come before the specified cursor."""
+    """
+    Returns the items in the list that come before the specified cursor.
+    """
     before: String
 
-    """Returns the last n items from the list."""
+    """
+    Returns the last n items from the list.
+    """
     last: Int
   ): PostConnection!
   createdAt: String
   updatedAt: String
 }
 
-"""A connection to a list of items."""
+"""
+A connection to a list of items.
+"""
 type UserConnection implements Connection {
-  """Number of items in this connection."""
+  """
+  Number of items in this connection.
+  """
   count: Int
 
   """
@@ -187,31 +277,49 @@ type UserConnection implements Connection {
   """
   totalCount: Int
 
-  """Offset from start."""
+  """
+  Offset from start.
+  """
   startCursorOffset: Int!
 
-  """Offset till end."""
+  """
+  Offset till end.
+  """
   endCursorOffset: Int!
 
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 
-  """A list of edges."""
+  """
+  A list of edges.
+  """
   edges: [UserEdge]!
 }
 
-"""An edge in a connection."""
+"""
+An edge in a connection.
+"""
 type UserEdge {
-  """The item at the end of the edge."""
+  """
+  The item at the end of the edge.
+  """
   node: User
 
-  """A cursor for use in pagination."""
+  """
+  A cursor for use in pagination.
+  """
   cursor: String!
 }
 
-"""A connection to a list of items."""
+"""
+A connection to a list of items.
+"""
 type CommentConnection implements Connection {
-  """Number of items in this connection."""
+  """
+  Number of items in this connection.
+  """
   count: Int
 
   """
@@ -222,48 +330,74 @@ type CommentConnection implements Connection {
   """
   totalCount: Int
 
-  """Offset from start."""
+  """
+  Offset from start.
+  """
   startCursorOffset: Int!
 
-  """Offset till end."""
+  """
+  Offset till end.
+  """
   endCursorOffset: Int!
 
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 
-  """A list of edges."""
+  """
+  A list of edges.
+  """
   edges: [CommentEdge]!
 }
 
-"""An edge in a connection."""
+"""
+An edge in a connection.
+"""
 type CommentEdge {
-  """The item at the end of the edge."""
+  """
+  The item at the end of the edge.
+  """
   node: Comment
 
-  """A cursor for use in pagination."""
+  """
+  A cursor for use in pagination.
+  """
   cursor: String!
 }
 
-"""Comment data"""
+"""
+Comment data
+"""
 type Comment implements Node {
-  """The ID of an object"""
+  """
+  The ID of an object
+  """
   id: ID!
 
-  """mongoose _id"""
+  """
+  mongoose _id
+  """
   _id: String!
   content: String
   post: Post
   author: User
 
-  """Total votes count (upvotes - downvotes)"""
+  """
+  Total votes count (upvotes - downvotes)
+  """
   votesCount: Int!
   createdAt: String
   updatedAt: String
 }
 
-"""A connection to a list of items."""
+"""
+A connection to a list of items.
+"""
 type CommunityConnection implements Connection {
-  """Number of items in this connection."""
+  """
+  Number of items in this connection.
+  """
   count: Int
 
   """
@@ -274,25 +408,39 @@ type CommunityConnection implements Connection {
   """
   totalCount: Int
 
-  """Offset from start."""
+  """
+  Offset from start.
+  """
   startCursorOffset: Int!
 
-  """Offset till end."""
+  """
+  Offset till end.
+  """
   endCursorOffset: Int!
 
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 
-  """A list of edges."""
+  """
+  A list of edges.
+  """
   edges: [CommunityEdge]!
 }
 
-"""An edge in a connection."""
+"""
+An edge in a connection.
+"""
 type CommunityEdge {
-  """The item at the end of the edge."""
+  """
+  The item at the end of the edge.
+  """
   node: Community
 
-  """A cursor for use in pagination."""
+  """
+  A cursor for use in pagination.
+  """
   cursor: String!
 }
 
@@ -311,15 +459,21 @@ type UserLoginPayload {
   token: NonEmptyString
   me: User
 
-  """Default error field resolver."""
+  """
+  Default error field resolver.
+  """
   error: String
 
-  """Default success field resolver."""
+  """
+  Default success field resolver.
+  """
   success: String
   clientMutationId: String
 }
 
-"""A string that cannot be passed as an empty value"""
+"""
+A string that cannot be passed as an empty value
+"""
 scalar NonEmptyString
 
 input UserLoginInput {
@@ -332,10 +486,14 @@ type UserRegisterPayload {
   token: NonEmptyString
   me: User
 
-  """Default error field resolver."""
+  """
+  Default error field resolver.
+  """
   error: String
 
-  """Default success field resolver."""
+  """
+  Default success field resolver.
+  """
   success: String
   clientMutationId: String
 }
@@ -371,10 +529,14 @@ scalar URL
 type PostCreatePayload {
   postEdge: PostEdge
 
-  """Default error field resolver."""
+  """
+  Default error field resolver.
+  """
   error: String
 
-  """Default success field resolver."""
+  """
+  Default success field resolver.
+  """
   success: String
   clientMutationId: String
 }
@@ -388,20 +550,28 @@ input PostCreateInput {
   clientMutationId: String
 }
 
-"""Minimum 1 characters, Maximum 300 characters"""
+"""
+Minimum 1 characters, Maximum 300 characters
+"""
 scalar PostTitleType
 
-"""Minimum 0 characters, Maximum 9999 characters"""
+"""
+Minimum 0 characters, Maximum 9999 characters
+"""
 scalar PostContentType
 
 type CommentCreatePayload {
   commentEdge: CommentEdge
   post: Post
 
-  """Default error field resolver."""
+  """
+  Default error field resolver.
+  """
   error: String
 
-  """Default success field resolver."""
+  """
+  Default success field resolver.
+  """
   success: String
   clientMutationId: String
 }
@@ -412,16 +582,22 @@ input CommentCreateInput {
   clientMutationId: String
 }
 
-"""Minimum 1 characters, Maximum 9999 characters"""
+"""
+Minimum 1 characters, Maximum 9999 characters
+"""
 scalar CommentContentType
 
 type CommunityCreatePayload {
   communityEdge: CommunityEdge
 
-  """Default error field resolver."""
+  """
+  Default error field resolver.
+  """
   error: String
 
-  """Default success field resolver."""
+  """
+  Default success field resolver.
+  """
   success: String
   clientMutationId: String
 }
@@ -433,19 +609,27 @@ input CommunityCreateInput {
   clientMutationId: String
 }
 
-"""Minimum 1 characters, Maximum 50 characters"""
+"""
+Minimum 1 characters, Maximum 50 characters
+"""
 scalar CommunityTitleType
 
-"""Minimum 1 characters, Maximum 300 characters"""
+"""
+Minimum 1 characters, Maximum 300 characters
+"""
 scalar CommunityAboutType
 
 type CommunityJoinPayload {
   communityEdge: CommunityEdge
 
-  """Default error field resolver."""
+  """
+  Default error field resolver.
+  """
   error: String
 
-  """Default success field resolver."""
+  """
+  Default success field resolver.
+  """
   success: String
   clientMutationId: String
 }
@@ -459,10 +643,14 @@ type VoteCreatePayload {
   comment: Comment
   post: Post
 
-  """Default error field resolver."""
+  """
+  Default error field resolver.
+  """
   error: String
 
-  """Default success field resolver."""
+  """
+  Default success field resolver.
+  """
   success: String
   clientMutationId: String
 }
@@ -480,10 +668,14 @@ enum VoteType {
 }
 
 type VoteDeletePayload {
-  """Default error field resolver."""
+  """
+  Default error field resolver.
+  """
   error: String
 
-  """Default success field resolver."""
+  """
+  Default success field resolver.
+  """
   success: String
   clientMutationId: String
 }

@@ -1,4 +1,4 @@
-import Router from '@koa/router';
+import Router from "@koa/router";
 import {
   getGraphQLParameters,
   processRequest,
@@ -6,17 +6,17 @@ import {
   sendResult,
   shouldRenderGraphiQL,
   Request,
-} from 'graphql-helix';
-import cors from 'kcors';
-import Koa from 'koa';
-import bodyParser from 'koa-bodyparser';
-import logger from 'koa-logger';
+} from "graphql-helix";
+import cors from "kcors";
+import Koa from "koa";
+import bodyParser from "koa-bodyparser";
+import logger from "koa-logger";
 
-import { getUser } from './auth';
-import { config } from './config';
-import { getContext } from './getContext';
-import { schema } from './schema';
-import { setCookie } from './util/setCookie';
+import { getUser } from "./auth";
+import { config } from "./config";
+import { getContext } from "./getContext";
+import { schema } from "./schema";
+import { setCookie } from "./util/setCookie";
 
 const app = new Koa();
 
@@ -24,14 +24,14 @@ app.use(bodyParser());
 app.use(cors());
 app.use(logger());
 
-app.on('error', err => {
+app.on("error", (err) => {
   // eslint-disable-next-line
-  console.log('[App Error]: ', err);
+  console.log("[App Error]: ", err);
 });
 
 const router = new Router();
 
-router.all('/graphql', async ctx => {
+router.all("/graphql", async (ctx) => {
   const { user } = await getUser(ctx.header.authorization);
 
   const request: Request = {
@@ -55,8 +55,7 @@ router.all('/graphql', async ctx => {
       variables,
       request,
       schema,
-      contextFactory: () =>
-        getContext({ req: request, user, koaContext: ctx, setCookie: setCookie(ctx) }),
+      contextFactory: () => getContext({ req: request, user, koaContext: ctx, setCookie: setCookie(ctx) }),
     });
 
     ctx.respond = false;
@@ -64,8 +63,8 @@ router.all('/graphql', async ctx => {
   }
 });
 
-router.get('/', async ctx => {
-  ctx.body = 'Welcome!';
+router.get("/", async (ctx) => {
+  ctx.body = "Welcome!";
 });
 
 app.use(router.routes()).use(router.allowedMethods());

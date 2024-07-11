@@ -1,11 +1,8 @@
-import { ArrowUpIcon } from '@chakra-ui/icons';
-import { Button, IconButton } from '@chakra-ui/react';
-import { ComponentProps } from 'react';
+import { ArrowUpIcon } from "@chakra-ui/icons";
+import { Button, IconButton } from "@chakra-ui/react";
+import { ComponentProps } from "react";
 
-export function VoteButton({
-  direction,
-  ...props
-}: ComponentProps<typeof IconButton> & { direction: 'up' | 'down' }) {
+export function VoteButton({ direction, ...props }: ComponentProps<typeof IconButton> & { direction: "up" | "down" }) {
   return (
     <IconButton
       {...props}
@@ -14,10 +11,10 @@ export function VoteButton({
       icon={<ArrowUpIcon />}
       as={Button}
       h="8"
-      transform={direction === 'up' ? 'none' : 'rotate(180deg)'}
+      transform={direction === "up" ? "none" : "rotate(180deg)"}
       display="flex"
       _hover={{
-        color: direction === 'up' ? 'red' : 'blue',
+        color: direction === "up" ? "red" : "blue",
       }}
     />
   );

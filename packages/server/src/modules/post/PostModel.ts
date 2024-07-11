@@ -1,4 +1,4 @@
-import mongoose, { Model, Types } from 'mongoose';
+import mongoose, { Model, Types } from "mongoose";
 
 import ObjectId = mongoose.Schema.Types.ObjectId;
 
@@ -30,24 +30,24 @@ const PostSchema = new mongoose.Schema<IPost>(
     },
     author: {
       type: ObjectId,
-      ref: 'User',
+      ref: "User",
       required: true,
     },
     community: {
       type: ObjectId,
-      ref: 'Community',
+      ref: "Community",
       required: true,
     },
   },
   {
     timestamps: {
-      createdAt: 'createdAt',
-      updatedAt: 'updatedAt',
+      createdAt: "createdAt",
+      updatedAt: "updatedAt",
     },
-    collection: 'Post',
+    collection: "Post",
   }
 );
 
-const PostModel: Model<IPost> = mongoose.models.Post || mongoose.model('Post', PostSchema);
+const PostModel: Model<IPost> = mongoose.models.Post || mongoose.model("Post", PostSchema);
 
 export default PostModel;

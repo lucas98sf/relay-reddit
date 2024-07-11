@@ -1,8 +1,8 @@
-import { createServer } from 'http';
+import { createServer } from "http";
 
-import app from './app';
-import { config } from './config';
-import { connectToDatabase } from './db';
+import app from "./app";
+import { config } from "./config";
+import { connectToDatabase } from "./db";
 
 (async () => {
   await connectToDatabase(config.MONGO_URI);

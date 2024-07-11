@@ -4,28 +4,28 @@ import {
   objectIdResolver,
   timestampResolver,
   withFilter,
-} from '@entria/graphql-mongo-helpers';
-import { GraphQLObjectType, GraphQLString, GraphQLNonNull } from 'graphql';
-import { globalIdField } from 'graphql-relay';
+} from "@entria/graphql-mongo-helpers";
+import { GraphQLObjectType, GraphQLString, GraphQLNonNull } from "graphql";
+import { globalIdField } from "graphql-relay";
 
-import { nodeInterface, registerTypeLoader } from '@/graphql/typeRegister';
-import { GraphQLContext } from '@/graphql/types';
-import * as CommunityLoader from '@/modules/community/CommunityLoader';
+import { nodeInterface, registerTypeLoader } from "@/graphql/typeRegister";
+import { GraphQLContext } from "@/graphql/types";
+import * as CommunityLoader from "@/modules/community/CommunityLoader";
 
-import * as CommentLoader from '../comment/CommentLoader';
-import { CommentConnection } from '../comment/CommentType';
-import { CommunityConnection } from '../community/CommunityType';
-import * as PostLoader from '../post/PostLoader';
-import { PostConnection } from '../post/PostType';
+import * as CommentLoader from "../comment/CommentLoader";
+import { CommentConnection } from "../comment/CommentType";
+import { CommunityConnection } from "../community/CommunityType";
+import * as PostLoader from "../post/PostLoader";
+import { PostConnection } from "../post/PostType";
 
-import { load } from './UserLoader';
-import { IUser } from './UserModel';
+import { load } from "./UserLoader";
+import { IUser } from "./UserModel";
 
 const UserType = new GraphQLObjectType<IUser, GraphQLContext>({
-  name: 'User',
-  description: 'User data',
+  name: "User",
+  description: "User data",
   fields: () => ({
-    id: globalIdField('User'),
+    id: globalIdField("User"),
     ...objectIdResolver,
     username: {
       type: GraphQLString,
@@ -88,6 +88,6 @@ export default UserType;
 registerTypeLoader(UserType, load);
 
 export const UserConnection = connectionDefinitions({
-  name: 'User',
+  name: "User",
   nodeType: UserType,
 });

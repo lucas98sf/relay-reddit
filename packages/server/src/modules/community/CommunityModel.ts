@@ -1,4 +1,4 @@
-import mongoose, { Model, Types } from 'mongoose';
+import mongoose, { Model, Types } from "mongoose";
 
 import ObjectId = mongoose.Schema.Types.ObjectId;
 
@@ -28,25 +28,24 @@ const CommunitySchema = new mongoose.Schema<ICommunity>(
     },
     members: {
       type: [ObjectId],
-      ref: 'User',
+      ref: "User",
       required: true,
     },
     owner: {
       type: ObjectId,
-      ref: 'User',
+      ref: "User",
       required: true,
     },
   },
   {
     timestamps: {
-      createdAt: 'createdAt',
-      updatedAt: 'updatedAt',
+      createdAt: "createdAt",
+      updatedAt: "updatedAt",
     },
-    collection: 'Community',
+    collection: "Community",
   }
 );
 
-const CommunityModel: Model<ICommunity> =
-  mongoose.models.Community || mongoose.model('Community', CommunitySchema);
+const CommunityModel: Model<ICommunity> = mongoose.models.Community || mongoose.model("Community", CommunitySchema);
 
 export default CommunityModel;

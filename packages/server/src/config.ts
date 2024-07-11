@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import path from 'path';
+import path from "path";
 
-import dotenvSafe from 'dotenv-safe';
+import dotenvSafe from "dotenv-safe";
 
 const root = path.join.bind(process.cwd());
 
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== "test") {
   dotenvSafe.config({
-    path: root('.env'),
-    sample: root('.env.example'),
+    path: root(".env"),
+    sample: root(".env.example"),
   });
 }
 

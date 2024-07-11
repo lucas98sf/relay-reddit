@@ -1,7 +1,7 @@
-import { GraphQLObjectType } from 'graphql';
+import { GraphQLObjectType } from "graphql";
 
 const SubscriptionType = new GraphQLObjectType({
-  name: 'Subscription',
+  name: "Subscription",
   fields: {},
 });
 

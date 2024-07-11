@@ -1,5 +1,5 @@
-import bcrypt from 'bcryptjs';
-import mongoose, { Document, Model, Types } from 'mongoose';
+import bcrypt from "bcryptjs";
+import mongoose, { Document, Model, Types } from "mongoose";
 
 import ObjectId = mongoose.Schema.Types.ObjectId;
 
@@ -37,7 +37,7 @@ const UserSchema = new mongoose.Schema<IUser>(
     },
     communities: {
       type: [ObjectId],
-      ref: 'Community',
+      ref: "Community",
       default: [],
     },
   },
@@ -46,12 +46,12 @@ const UserSchema = new mongoose.Schema<IUser>(
       createdAt: true,
       updatedAt: true,
     },
-    collection: 'User',
+    collection: "User",
   }
 );
 
-UserSchema.pre<IUser & Document>('save', function encryptPasswordHook(next) {
-  if (this.isModified('password')) {
+UserSchema.pre<IUser & Document>("save", function encryptPasswordHook(next) {
+  if (this.isModified("password")) {
     this.password = this.encryptPassword(this.password);
   }
 
@@ -67,6 +67,6 @@ UserSchema.methods = {
   },
 };
 
-const UserModel: Model<IUser> = mongoose.models.User || mongoose.model('User', UserSchema);
+const UserModel: Model<IUser> = mongoose.models.User || mongoose.model("User", UserSchema);
 
 export default UserModel;

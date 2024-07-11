@@ -1,7 +1,7 @@
-import { getObjectId } from '@entria/graphql-mongo-helpers';
+import { getObjectId } from "@entria/graphql-mongo-helpers";
 
-import User from '../../../user/UserModel';
-import Community from '../../CommunityModel';
+import User from "../../../user/UserModel";
+import Community from "../../CommunityModel";
 
 export const joinCommunity = async (joinerId: string, communityId: string) => {
   const joinerObjectId = getObjectId(joinerId);

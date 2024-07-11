@@ -1,17 +1,17 @@
-import { errorField, successField } from '@entria/graphql-mongo-helpers';
-import { mutationWithClientMutationId } from 'graphql-relay';
-import { GraphQLEmailAddress, GraphQLNonEmptyString, GraphQLURL } from 'graphql-scalars';
+import { errorField, successField } from "@entria/graphql-mongo-helpers";
+import { mutationWithClientMutationId } from "graphql-relay";
+import { GraphQLEmailAddress, GraphQLNonEmptyString, GraphQLURL } from "graphql-scalars";
 
-import { generateToken } from '@/auth';
-import { config } from '@/config';
-import { GraphQLPassword, GraphQLUsername } from '@/graphql/customScalars';
+import { generateToken } from "@/auth";
+import { config } from "@/config";
+import { GraphQLPassword, GraphQLUsername } from "@/graphql/customScalars";
 
-import * as UserLoader from '../UserLoader';
-import User from '../UserModel';
-import UserType from '../UserType';
+import * as UserLoader from "../UserLoader";
+import User from "../UserModel";
+import UserType from "../UserType";
 
 export const UserRegister = mutationWithClientMutationId({
-  name: 'UserRegister',
+  name: "UserRegister",
   inputFields: {
     username: {
       type: GraphQLUsername,
@@ -28,11 +28,10 @@ export const UserRegister = mutationWithClientMutationId({
   },
   mutateAndGetPayload: async ({ username, email, password, avatar }, context) => {
     const hasUserEmail = (await User.countDocuments({ email: email.trim().toLowerCase() })) > 0;
-    if (hasUserEmail) return { error: 'email already in use' };
+    if (hasUserEmail) return { error: "email already in use" };
 
-    const hasUsername =
-      (await User.countDocuments({ username: new RegExp(username.trim(), 'i') })) > 0;
-    if (hasUsername) return { error: 'username already in use' };
+    const hasUsername = (await User.countDocuments({ username: new RegExp(username.trim(), "i") })) > 0;
+    if (hasUsername) return { error: "username already in use" };
 
     const user = await new User({
       username,
@@ -48,7 +47,7 @@ export const UserRegister = mutationWithClientMutationId({
     return {
       token,
       id: user._id,
-      success: 'User registered',
+      success: "User registered",
     };
   },
   outputFields: {

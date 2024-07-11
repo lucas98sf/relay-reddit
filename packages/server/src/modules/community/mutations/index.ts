@@ -1,2 +1,2 @@
-export * from './communityCreate';
-export * from './communityJoin';
+export * from "./communityCreate";
+export * from "./communityJoin";

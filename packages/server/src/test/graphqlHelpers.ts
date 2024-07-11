@@ -1,8 +1,8 @@
-import { graphql } from 'graphql';
+import { graphql } from "graphql";
 
-import { schema } from '@/schema';
+import { schema } from "@/schema";
 
-import { getContext, ContextVars } from '../getContext';
+import { getContext, ContextVars } from "../getContext";
 
 // Used to improve DX on tests
 export const gql = (strings: TemplateStringsArray) => strings[0];
@@ -14,8 +14,7 @@ export type MutationOutput = {
 };
 
 export const createMutation =
-  (mutationName: string) =>
-  async (variables: Record<string, string>, outputFields: string, ctx?: ContextVars) => {
+  (mutationName: string) => async (variables: Record<string, string>, outputFields: string, ctx?: ContextVars) => {
     const source = `mutation ${mutationName}($input: ${mutationName}Input!) {
       ${mutationName}(input: $input) {
         error
@@ -37,7 +36,7 @@ export const createMutation =
       source,
       variableValues,
       contextValue,
-    }).then(result => {
+    }).then((result) => {
       if (result.errors) {
         throw result.errors[0];
       }

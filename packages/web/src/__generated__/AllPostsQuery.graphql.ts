@@ -8,7 +8,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { ConcreteRequest, Query } from 'relay-runtime';
+import { ConcreteRequest, Query } from "relay-runtime";
 export type AllPostsQuery$variables = {};
 export type AllPostsQuery$data = {
   readonly posts: {
@@ -41,103 +41,103 @@ const node: ConcreteRequest = (function () {
   var v0 = {
       alias: null,
       args: null,
-      kind: 'ScalarField',
-      name: 'totalCount',
+      kind: "ScalarField",
+      name: "totalCount",
       storageKey: null,
     },
     v1 = {
       alias: null,
       args: null,
-      kind: 'ScalarField',
-      name: 'id',
+      kind: "ScalarField",
+      name: "id",
       storageKey: null,
     },
     v2 = {
       alias: null,
       args: null,
-      kind: 'ScalarField',
-      name: 'title',
+      kind: "ScalarField",
+      name: "title",
       storageKey: null,
     },
     v3 = {
       alias: null,
       args: null,
-      kind: 'ScalarField',
-      name: 'content',
+      kind: "ScalarField",
+      name: "content",
       storageKey: null,
     },
     v4 = {
       alias: null,
       args: null,
-      kind: 'ScalarField',
-      name: 'image',
+      kind: "ScalarField",
+      name: "image",
       storageKey: null,
     },
     v5 = {
       alias: null,
       args: null,
-      kind: 'ScalarField',
-      name: 'createdAt',
+      kind: "ScalarField",
+      name: "createdAt",
       storageKey: null,
     },
     v6 = {
       alias: null,
       args: null,
-      kind: 'ScalarField',
-      name: 'updatedAt',
+      kind: "ScalarField",
+      name: "updatedAt",
       storageKey: null,
     },
     v7 = {
       alias: null,
       args: null,
-      kind: 'ScalarField',
-      name: 'name',
+      kind: "ScalarField",
+      name: "name",
       storageKey: null,
     },
     v8 = {
       alias: null,
       args: null,
-      kind: 'ScalarField',
-      name: 'username',
+      kind: "ScalarField",
+      name: "username",
       storageKey: null,
     },
     v9 = {
       alias: null,
       args: null,
-      kind: 'ScalarField',
-      name: 'votesCount',
+      kind: "ScalarField",
+      name: "votesCount",
       storageKey: null,
     };
   return {
     fragment: {
       argumentDefinitions: [],
-      kind: 'Fragment',
+      kind: "Fragment",
       metadata: null,
-      name: 'AllPostsQuery',
+      name: "AllPostsQuery",
       selections: [
         {
           alias: null,
           args: null,
-          concreteType: 'PostConnection',
-          kind: 'LinkedField',
-          name: 'posts',
+          concreteType: "PostConnection",
+          kind: "LinkedField",
+          name: "posts",
           plural: false,
           selections: [
             v0 /*: any*/,
             {
               alias: null,
               args: null,
-              concreteType: 'PostEdge',
-              kind: 'LinkedField',
-              name: 'edges',
+              concreteType: "PostEdge",
+              kind: "LinkedField",
+              name: "edges",
               plural: true,
               selections: [
                 {
                   alias: null,
                   args: null,
-                  concreteType: 'Post',
-                  kind: 'LinkedField',
-                  name: 'node',
+                  concreteType: "Post",
+                  kind: "LinkedField",
+                  name: "node",
                   plural: false,
                   selections: [
                     v1 /*: any*/,
@@ -149,9 +149,9 @@ const node: ConcreteRequest = (function () {
                     {
                       alias: null,
                       args: null,
-                      concreteType: 'Community',
-                      kind: 'LinkedField',
-                      name: 'community',
+                      concreteType: "Community",
+                      kind: "LinkedField",
+                      name: "community",
                       plural: false,
                       selections: [v7 /*: any*/],
                       storageKey: null,
@@ -159,9 +159,9 @@ const node: ConcreteRequest = (function () {
                     {
                       alias: null,
                       args: null,
-                      concreteType: 'User',
-                      kind: 'LinkedField',
-                      name: 'author',
+                      concreteType: "User",
+                      kind: "LinkedField",
+                      name: "author",
                       plural: false,
                       selections: [v8 /*: any*/],
                       storageKey: null,
@@ -177,38 +177,38 @@ const node: ConcreteRequest = (function () {
           storageKey: null,
         },
       ],
-      type: 'Query',
+      type: "Query",
       abstractKey: null,
     },
-    kind: 'Request',
+    kind: "Request",
     operation: {
       argumentDefinitions: [],
-      kind: 'Operation',
-      name: 'AllPostsQuery',
+      kind: "Operation",
+      name: "AllPostsQuery",
       selections: [
         {
           alias: null,
           args: null,
-          concreteType: 'PostConnection',
-          kind: 'LinkedField',
-          name: 'posts',
+          concreteType: "PostConnection",
+          kind: "LinkedField",
+          name: "posts",
           plural: false,
           selections: [
             v0 /*: any*/,
             {
               alias: null,
               args: null,
-              concreteType: 'PostEdge',
-              kind: 'LinkedField',
-              name: 'edges',
+              concreteType: "PostEdge",
+              kind: "LinkedField",
+              name: "edges",
               plural: true,
               selections: [
                 {
                   alias: null,
                   args: null,
-                  concreteType: 'Post',
-                  kind: 'LinkedField',
-                  name: 'node',
+                  concreteType: "Post",
+                  kind: "LinkedField",
+                  name: "node",
                   plural: false,
                   selections: [
                     v1 /*: any*/,
@@ -220,9 +220,9 @@ const node: ConcreteRequest = (function () {
                     {
                       alias: null,
                       args: null,
-                      concreteType: 'Community',
-                      kind: 'LinkedField',
-                      name: 'community',
+                      concreteType: "Community",
+                      kind: "LinkedField",
+                      name: "community",
                       plural: false,
                       selections: [v7 /*: any*/, v1 /*: any*/],
                       storageKey: null,
@@ -230,9 +230,9 @@ const node: ConcreteRequest = (function () {
                     {
                       alias: null,
                       args: null,
-                      concreteType: 'User',
-                      kind: 'LinkedField',
-                      name: 'author',
+                      concreteType: "User",
+                      kind: "LinkedField",
+                      name: "author",
                       plural: false,
                       selections: [v8 /*: any*/, v1 /*: any*/],
                       storageKey: null,
@@ -250,16 +250,16 @@ const node: ConcreteRequest = (function () {
       ],
     },
     params: {
-      cacheID: '74595ac9dc7be36e68f2296c2af25d5f',
+      cacheID: "74595ac9dc7be36e68f2296c2af25d5f",
       id: null,
       metadata: {},
-      name: 'AllPostsQuery',
-      operationKind: 'query',
-      text: 'query AllPostsQuery {\n  posts {\n    totalCount\n    edges {\n      node {\n        id\n        title\n        content\n        image\n        createdAt\n        updatedAt\n        community {\n          name\n          id\n        }\n        author {\n          username\n          id\n        }\n        votesCount\n      }\n    }\n  }\n}\n',
+      name: "AllPostsQuery",
+      operationKind: "query",
+      text: "query AllPostsQuery {\n  posts {\n    totalCount\n    edges {\n      node {\n        id\n        title\n        content\n        image\n        createdAt\n        updatedAt\n        community {\n          name\n          id\n        }\n        author {\n          username\n          id\n        }\n        votesCount\n      }\n    }\n  }\n}\n",
     },
   };
 })();
 
-(node as any).hash = '754d6488398db2c5f89d43c68552646e';
+(node as any).hash = "754d6488398db2c5f89d43c68552646e";
 
 export default node;

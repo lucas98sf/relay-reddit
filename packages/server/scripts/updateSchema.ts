@@ -1,10 +1,10 @@
-import fs from 'fs';
-import path from 'path';
-import { promisify } from 'util';
+import fs from "fs";
+import path from "path";
+import { promisify } from "util";
 
-import { printSchema } from 'graphql/utilities';
+import { printSchema } from "graphql/utilities";
 
-import { schema } from '../src/schema';
+import { schema } from "../src/schema";
 
 const writeFileAsync = promisify(fs.writeFile);
 
@@ -19,7 +19,7 @@ const cwd = process.cwd();
   ];
 
   await Promise.all([
-    ...configs.map(async config => {
+    ...configs.map(async (config) => {
       await writeFileAsync(config.path, printSchema(config.schema));
     }),
   ]);

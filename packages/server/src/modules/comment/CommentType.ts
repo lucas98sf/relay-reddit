@@ -1,28 +1,24 @@
-import {
-  connectionDefinitions,
-  objectIdResolver,
-  timestampResolver,
-} from '@entria/graphql-mongo-helpers';
-import { GraphQLInt, GraphQLNonNull, GraphQLObjectType, GraphQLString } from 'graphql';
-import { globalIdField } from 'graphql-relay';
+import { connectionDefinitions, objectIdResolver, timestampResolver } from "@entria/graphql-mongo-helpers";
+import { GraphQLInt, GraphQLNonNull, GraphQLObjectType, GraphQLString } from "graphql";
+import { globalIdField } from "graphql-relay";
 
-import { nodeInterface, registerTypeLoader } from '@/graphql/typeRegister';
-import { GraphQLContext } from '@/graphql/types';
+import { nodeInterface, registerTypeLoader } from "@/graphql/typeRegister";
+import { GraphQLContext } from "@/graphql/types";
 
-import * as PostLoader from '../post/PostLoader';
-import PostType from '../post/PostType';
-import * as UserLoader from '../user/UserLoader';
-import UserType from '../user/UserType';
-import VoteModel from '../vote/VoteModel';
+import * as PostLoader from "../post/PostLoader";
+import PostType from "../post/PostType";
+import * as UserLoader from "../user/UserLoader";
+import UserType from "../user/UserType";
+import VoteModel from "../vote/VoteModel";
 
-import { load } from './CommentLoader';
-import { IComment } from './CommentModel';
+import { load } from "./CommentLoader";
+import { IComment } from "./CommentModel";
 
 const CommentType = new GraphQLObjectType<IComment, GraphQLContext>({
-  name: 'Comment',
-  description: 'Comment data',
+  name: "Comment",
+  description: "Comment data",
   fields: () => ({
-    id: globalIdField('Comment'),
+    id: globalIdField("Comment"),
     ...objectIdResolver,
     content: {
       type: GraphQLString,
@@ -39,7 +35,7 @@ const CommentType = new GraphQLObjectType<IComment, GraphQLContext>({
     votesCount: {
       type: new GraphQLNonNull(GraphQLInt),
       resolve: async ({ _id }) => (await VoteModel.countVotes({ comment: _id }))?.total,
-      description: 'Total votes count (upvotes - downvotes)',
+      description: "Total votes count (upvotes - downvotes)",
     },
     ...timestampResolver,
   }),
@@ -51,6 +47,6 @@ export default CommentType;
 registerTypeLoader(CommentType, load);
 
 export const CommentConnection = connectionDefinitions({
-  name: 'Comment',
+  name: "Comment",
   nodeType: CommentType,
 });
