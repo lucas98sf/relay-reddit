@@ -1,0 +1,130 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator gen {
+  provider = "prisma-client-js"
+}
+
+generator pothos {
+  provider = "prisma-pothos-types"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// export type ICommunity = {
+//   name: string;
+//   title: string;
+//   about: string;
+//   owner: Types.ObjectId;
+//   members: Types.ObjectId[];
+//   createdAt: Date;
+//   updatedAt: Date;
+// } & { _id: Types.ObjectId };
+model Community {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  title      String
+  about      String
+  owner      User     @relation("CommunityOwner", fields: [ownerId], references: [id])
+  ownerId    String   @db.ObjectId
+  members    User[]   @relation("CommunityMembers", fields: [membersIds], references: [id])
+  membersIds String[] @db.ObjectId
+  posts      Post[]
+}
+
+// export type IUser = {
+//   username: string;
+//   email: string;
+//   password: string;
+//   avatar?: string;
+//   communities: Types.ObjectId[];
+//   createdAt: Date;
+//   updatedAt: Date;
+//   authenticate: (plainTextPassword: string) => boolean;
+//   encryptPassword: (password: string | undefined) => string;
+// } & { _id: Types.ObjectId };
+model User {
+  id                  String      @id @default(auto()) @map("_id") @db.ObjectId
+  username            String
+  email               String
+  password            String
+  avatar              String?
+  memberOfCommunities Community[] @relation("CommunityMembers", fields: [communitiesIds], references: [id])
+  communitiesIds      String[]    @db.ObjectId
+  ownedCommunities    Community[] @relation("CommunityOwner")
+  ownedCommunitiesIds String[]    @db.ObjectId
+  posts               Post[]
+  comments            Comment[]
+  votes               Vote[]
+}
+
+// export type IPost = {
+//   title: string;
+//   content?: string;
+//   image?: string;
+//   url?: string;
+//   author: Types.ObjectId;
+//   community: Types.ObjectId;
+//   createdAt: Date;
+//   updatedAt: Date;
+// } & { _id: Types.ObjectId };
+model Post {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  content     String?
+  image       String?
+  url         String?
+  author      User      @relation(fields: [authorId], references: [id])
+  authorId    String    @db.ObjectId
+  community   Community @relation(fields: [communityId], references: [id])
+  communityId String    @db.ObjectId
+  comments    Comment[]
+  votes       Vote[]
+}
+
+// export type IComment = {
+//   content?: string;
+//   post: Types.ObjectId;
+//   author: Types.ObjectId;
+//   createdAt: Date;
+//   updatedAt: Date;
+// } & { _id: Types.ObjectId };
+model Comment {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  content  String?
+  post     Post    @relation(fields: [postId], references: [id])
+  postId   String  @db.ObjectId
+  author   User    @relation(fields: [authorId], references: [id])
+  authorId String  @db.ObjectId
+  votes    Vote[]
+}
+
+// export type IVote = {
+//   type: "UPVOTE" | "DOWNVOTE";
+//   post?: Types.ObjectId;
+//   comment?: Types.ObjectId;
+//   author: Types.ObjectId;
+//   createdAt: Date;
+//   updatedAt: Date;
+// } & { _id: Types.ObjectId };
+enum VoteType {
+  Upvote
+  Downvote
+}
+
+model Vote {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  type      VoteType
+  post      Post?    @relation(fields: [postId], references: [id])
+  postId    String?  @db.ObjectId
+  comment   Comment? @relation(fields: [commentId], references: [id])
+  commentId String?  @db.ObjectId
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String   @db.ObjectId
+}

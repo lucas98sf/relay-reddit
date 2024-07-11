@@ -5,7 +5,7 @@ import { config } from "./config";
 import { connectToDatabase } from "./db";
 
 (async () => {
-  await connectToDatabase(config.MONGO_URI);
+  await connectToDatabase(config.DATABASE_URL);
 
   const server = createServer(app.callback());
 

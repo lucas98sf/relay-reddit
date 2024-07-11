@@ -15,7 +15,7 @@ if (process.env.NODE_ENV !== "test") {
 const ENV = process.env;
 
 export const config = {
-  MONGO_URI: ENV.MONGO_URI!,
+  DATABASE_URL: ENV.DATABASE_URL!,
   PORT: ENV.PORT!,
   JWT_SECRET_KEY: ENV.JWT_SECRET_KEY!,
   TOKEN_COOKIE: ENV.TOKEN_COOKIE!,

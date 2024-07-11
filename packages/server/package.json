@@ -14,6 +14,11 @@
     "@entria/graphql-mongoose-loader": "^4.4.0",
     "@koa/cors": "^2.2.3",
     "@koa/router": "^12.0.1",
+    "@pothos/core": "^4.0.0",
+    "@pothos/plugin-prisma": "^4.0.1",
+    "@pothos/plugin-relay": "^4.0.0",
+    "@pothos/plugin-zod": "^4.0.0",
+    "@prisma/client": "^5.16.2",
     "bcryptjs": "^2.4.3",
     "dataloader": "^2.2.2",
     "dotenv-safe": "^8.2.0",
@@ -27,8 +32,11 @@
     "koa-body": "^5.0.0",
     "koa-bodyparser": "^4.4.1",
     "koa-logger": "^3.2.1",
+    "mongodb": "^6.8.0",
     "mongodb-memory-server": "^8.16.0",
-    "mongoose": "^6.13.0"
+    "mongoose": "^6.13.0",
+    "prisma": "^5.16.2",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
