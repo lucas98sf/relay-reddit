@@ -5,38 +5,39 @@
   "scripts": {
     "prebuild": "pnpm update-schema",
     "predev": "pnpm update-schema",
-    "dev": "ts-node-dev -r tsconfig-paths/register --transpile-only --ignore-watch node_modules src/server.ts",
-    "update-schema": "ts-node -r tsconfig-paths/register --transpile-only scripts/updateSchema.ts"
+    "dev": "tsx src/server.ts",
+    "update-schema": "tsx scripts/updateSchema.ts",
+    "test": "jest --config=jest.config.js"
   },
   "dependencies": {
     "@entria/graphql-mongo-helpers": "^1.1.2",
     "@entria/graphql-mongoose-loader": "^4.4.0",
-    "@koa/cors": "2",
-    "@koa/router": "^12.0.0",
+    "@koa/cors": "^2.2.3",
+    "@koa/router": "^12.0.1",
     "bcryptjs": "^2.4.3",
-    "dataloader": "^2.1.0",
+    "dataloader": "^2.2.2",
     "dotenv-safe": "^8.2.0",
-    "graphql": "^16.6.0",
+    "graphql": "^16.9.0",
     "graphql-helix": "^1.13.0",
-    "graphql-relay": "^0.10.0",
-    "graphql-scalars": "^1.18.0",
+    "graphql-relay": "^0.10.2",
+    "graphql-scalars": "^1.23.0",
     "jsonwebtoken": "^8.5.1",
     "kcors": "^2.2.2",
-    "koa": "^2.13.4",
+    "koa": "^2.15.3",
     "koa-body": "^5.0.0",
-    "koa-bodyparser": "^4.3.0",
+    "koa-bodyparser": "^4.4.1",
     "koa-logger": "^3.2.1",
-    "mongodb-memory-server": "^8.9.3",
-    "mongoose": "^6.6.5"
+    "mongodb-memory-server": "^8.16.0",
+    "mongoose": "^6.13.0"
   },
   "devDependencies": {
-    "@types/bcryptjs": "^2.4.2",
-    "@types/dotenv-safe": "^8.1.2",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/dotenv-safe": "^8.1.6",
     "@types/jsonwebtoken": "^8.5.9",
-    "@types/kcors": "^2.2.6",
-    "@types/koa": "^2.13.5",
-    "@types/koa-bodyparser": "^4.3.8",
-    "@types/koa-logger": "^3.1.2",
-    "@types/koa__router": "^12.0.0"
+    "@types/kcors": "^2.2.8",
+    "@types/koa": "^2.15.0",
+    "@types/koa-bodyparser": "^4.3.12",
+    "@types/koa-logger": "^3.1.5",
+    "@types/koa__router": "^12.0.4"
   }
 }

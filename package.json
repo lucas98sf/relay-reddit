@@ -16,7 +16,8 @@
     "dev:web": "pnpm -filter web dev",
     "lint": "eslint --fix . && prettier --write .",
     "prepare": "husky install",
-    "update-schema": "pnpm --server update-schema"
+    "update-schema": "pnpm --server update-schema",
+    "test": "pnpm --filter server test"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -28,11 +29,11 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.24.1",
-    "@babel/preset-env": "^7.24.1",
-    "@babel/preset-typescript": "^7.24.1",
+    "@babel/core": "^7.24.8",
+    "@babel/preset-env": "^7.24.8",
+    "@babel/preset-typescript": "^7.24.7",
     "@types/jest": "^29.5.12",
-    "@types/node": "^18.19.26",
+    "@types/node": "^18.19.39",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "babel-jest": "^29.7.0",
@@ -43,19 +44,20 @@
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jest": "^27.9.0",
-    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-jsx-a11y": "^6.9.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.34.1",
-    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react": "^7.34.3",
+    "eslint-plugin-react-hooks": "^4.6.2",
     "husky": "^8.0.3",
     "jest": "^29.7.0",
     "lint-staged": "^13.3.0",
     "prettier": "^2.8.8",
-    "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^4.9.5"
+    "typescript": "^5.5.3"
   },
   "engines": {
     "node": ">=16.0.0"
+  },
+  "dependencies": {
+    "tsx": "^4.16.2"
   }
 }
